@@ -16,7 +16,7 @@ class ObserveViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imageView.image = UIImage(named: elements[myIndex])
+        imageView.image = UIImage(named: names[myIndex])
         
         // Do any additional setup after loading the view.
     }

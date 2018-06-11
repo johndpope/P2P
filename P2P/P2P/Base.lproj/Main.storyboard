@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p0D-mX-M68">
-                                <rect key="frame" x="0.0" y="79" width="375" height="588"/>
+                                <rect key="frame" x="0.0" y="75" width="375" height="592"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="customCell" rowHeight="100" id="okj-7G-qu9" customClass="CustomTableViewCell" customModule="P2P" customModuleProvider="target">
@@ -73,14 +73,38 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ECY-4w-eCs">
+                                <rect key="frame" x="152" y="20" width="70" height="47"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <state key="normal" title="Insert">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="Insert_Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QnT-kv-ksH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mon-21-h7N">
+                                <rect key="frame" x="262" y="20" width="104" height="47"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <state key="normal" title="Settings">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="p0D-mX-M68" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NUw-1b-nWb"/>
-                            <constraint firstItem="p0D-mX-M68" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="OAq-hv-Gtg"/>
-                            <constraint firstItem="p0D-mX-M68" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="59" id="dKN-jN-iSu"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="p0D-mX-M68" secondAttribute="bottom" id="eIK-bE-u5T"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="p0D-mX-M68" secondAttribute="trailing" id="hsJ-SU-gdA"/>
+                            <constraint firstItem="p0D-mX-M68" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="2kA-Gy-kVN"/>
+                            <constraint firstItem="p0D-mX-M68" firstAttribute="top" secondItem="mon-21-h7N" secondAttribute="bottom" constant="8" id="9e8-Uf-GNh"/>
+                            <constraint firstItem="p0D-mX-M68" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="acm-Ke-dIA"/>
+                            <constraint firstItem="mon-21-h7N" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bZl-aH-1qX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mon-21-h7N" secondAttribute="trailing" constant="9" id="c0x-kz-Et3"/>
+                            <constraint firstItem="mon-21-h7N" firstAttribute="leading" secondItem="ECY-4w-eCs" secondAttribute="trailing" constant="40" id="dfS-Qc-sET"/>
+                            <constraint firstItem="p0D-mX-M68" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kBp-dD-SEM"/>
+                            <constraint firstItem="p0D-mX-M68" firstAttribute="top" secondItem="ECY-4w-eCs" secondAttribute="bottom" constant="8" id="kuM-Av-qMV"/>
+                            <constraint firstItem="p0D-mX-M68" firstAttribute="top" secondItem="ECY-4w-eCs" secondAttribute="bottom" constant="8" id="rFy-F0-SD3"/>
+                            <constraint firstItem="ECY-4w-eCs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="152" id="ujE-DW-VBB"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ECY-4w-eCs" secondAttribute="trailing" constant="153" id="ukv-td-CEX"/>
+                            <constraint firstItem="ECY-4w-eCs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="vXz-kc-dGk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -143,6 +167,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="IMG_1" width="1878" height="940"/>
+        <image name="IMG_1" width="2560" height="1600"/>
     </resources>
 </document>
