@@ -15,15 +15,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var tableView: UITableView!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         tableView.delegate = self
         tableView.dataSource = self
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
     @IBAction func Insert_Pressed(_ sender: Any) {
         names.append("IMG_\(names.count+1)")
         img_names.append("TEST\(img_names.count+1)")
@@ -78,6 +79,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.imageThumbnail.layer.cornerRadius = cell.imageThumbnail.frame.height / 2
         
         return cell
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     
