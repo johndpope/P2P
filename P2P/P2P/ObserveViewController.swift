@@ -16,8 +16,8 @@ class ObserveViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imageView.image = UIImage(named: names[myIndex])
-        
+        //imageView.image = UIImage(named: data[myIndex])
+        imageView.image = data[myIndex].image
         // Do any additional setup after loading the view.
     }
     
@@ -26,6 +26,9 @@ class ObserveViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     /*
      // MARK: - Navigation
