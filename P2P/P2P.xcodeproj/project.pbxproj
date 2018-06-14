@@ -65,6 +65,14 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		E09229B620D30E4D005160B2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E070AFAD20CF323A00622BBF /* CustomTableViewCell.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		E0E0247020CF3134000FD2D6 = {
 			isa = PBXGroup;
 			children = (
@@ -84,12 +92,12 @@
 		E0E0247B20CF3134000FD2D6 /* P2P */ = {
 			isa = PBXGroup;
 			children = (
+				E09229B620D30E4D005160B2 /* Model */,
+				E09229B320D30D40005160B2 /* View */,
 				E09229B520D30D68005160B2 /* Controller */,
 				E09229B420D30D5A005160B2 /* App */,
-				E09229B320D30D40005160B2 /* View */,
 				E0E0248320CF3135000FD2D6 /* Assets.xcassets */,
 				E0E0248820CF3135000FD2D6 /* Info.plist */,
-				E070AFAD20CF323A00622BBF /* CustomTableViewCell.swift */,
 			);
 			path = P2P;
 			sourceTree = "<group>";
