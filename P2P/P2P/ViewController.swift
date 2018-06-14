@@ -6,6 +6,8 @@
 //  Copyright © 2018 Roma Babajanyan. All rights reserved.
 //
 
+
+//todo fix auto delete when out of image viewing
 import UIKit
 
 var myIndex = 0
