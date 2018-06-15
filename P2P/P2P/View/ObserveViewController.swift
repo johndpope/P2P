@@ -8,10 +8,12 @@
 
 import UIKit
 
-class ObserveViewController: UIViewController {
+class ObserveViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var imageView: UIImageView!
     
+    
+    @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +21,10 @@ class ObserveViewController: UIViewController {
         //imageView.image = UIImage(named: data[myIndex])
         imageView.image = data[myIndex].image
         // Do any additional setup after loading the view.
+        //Set up zooming
+        self.scrollView.minimumZoomScale = 1.0
+        self.scrollView.maximumZoomScale = 5.0
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -28,6 +34,10 @@ class ObserveViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.imageView
     }
     
     /*

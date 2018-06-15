@@ -18,17 +18,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SqW-J7-Ctk">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="25"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="9Cy-iw-h9x">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="25"/>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SqW-J7-Ctk">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="17"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9Cy-iw-h9x">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="17"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <blurEffect style="light"/>
                             </visualEffectView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="P2P" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ynj-eP-xrQ">
-                                <rect key="frame" x="83" y="257" width="208" height="153"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="P2P" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ynj-eP-xrQ">
+                                <rect key="frame" x="83" y="249" width="208" height="161"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="80"/>
                                 <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -36,7 +35,14 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ynj-eP-xrQ" secondAttribute="bottom" constant="257" id="0eb-9n-Jw2"/>
+                            <constraint firstItem="Ynj-eP-xrQ" firstAttribute="top" secondItem="SqW-J7-Ctk" secondAttribute="bottom" constant="232" id="FmG-P1-ShR"/>
+                            <constraint firstItem="SqW-J7-Ctk" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="IzE-dn-nw3"/>
+                            <constraint firstItem="Ynj-eP-xrQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="83" id="N5Q-KU-eHk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SqW-J7-Ctk" secondAttribute="bottom" constant="650" id="TdX-tq-jXL"/>
+                            <constraint firstItem="SqW-J7-Ctk" firstAttribute="centerX" secondItem="Ynj-eP-xrQ" secondAttribute="centerX" id="blz-w6-Scn"/>
+                            <constraint firstItem="SqW-J7-Ctk" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="mi9-ZS-hxx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ynj-eP-xrQ" secondAttribute="trailing" constant="84" id="tAI-Ia-ukQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
