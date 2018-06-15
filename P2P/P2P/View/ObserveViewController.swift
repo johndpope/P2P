@@ -19,7 +19,7 @@ class ObserveViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         
         //imageView.image = UIImage(named: data[myIndex])
-        imageView.image = data[myIndex].image
+        imageView.image = data.data[myIndex].image
         // Do any additional setup after loading the view.
         //Set up zooming
         self.scrollView.minimumZoomScale = 1.0
@@ -40,6 +40,10 @@ class ObserveViewController: UIViewController, UIScrollViewDelegate {
         return self.imageView
     }
     
+    @IBAction func doneTaped(_ sender: UIButton) {
+        print(#function)
+        //print(data)
+    }
     /*
      // MARK: - Navigation
      

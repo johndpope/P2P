@@ -33,7 +33,7 @@
                                                     <rect key="frame" x="10" y="5" width="355" height="89.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aang" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1G-6B-MNu">
-                                                            <rect key="frame" x="103" y="8" width="244" height="74"/>
+                                                            <rect key="frame" x="88" y="8" width="259" height="74"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                             <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -55,7 +55,6 @@
                                                         <constraint firstItem="q8c-ZY-dPy" firstAttribute="centerY" secondItem="6bB-YA-7c8" secondAttribute="centerY" id="L4o-ml-ruU"/>
                                                         <constraint firstAttribute="trailing" secondItem="b1G-6B-MNu" secondAttribute="trailing" constant="8" id="Oj1-GE-a8O"/>
                                                         <constraint firstAttribute="bottom" secondItem="b1G-6B-MNu" secondAttribute="bottom" constant="7.5" id="bUE-MR-ooo"/>
-                                                        <constraint firstItem="b1G-6B-MNu" firstAttribute="leading" secondItem="q8c-ZY-dPy" secondAttribute="trailing" constant="23" id="gT3-jD-gzQ"/>
                                                         <constraint firstItem="b1G-6B-MNu" firstAttribute="top" secondItem="6bB-YA-7c8" secondAttribute="top" constant="8" id="h94-Bx-375"/>
                                                         <constraint firstAttribute="bottom" secondItem="b1G-6B-MNu" secondAttribute="bottom" constant="8" id="w7p-Wh-o01"/>
                                                     </constraints>
@@ -78,7 +77,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mon-21-h7N">
-                                <rect key="frame" x="294" y="24" width="72" height="26"/>
+                                <rect key="frame" x="294" y="20" width="72" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Settings">
                                     <color key="titleColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -110,14 +109,12 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="p0D-mX-M68" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="2kA-Gy-kVN"/>
-                            <constraint firstItem="p0D-mX-M68" firstAttribute="top" secondItem="mon-21-h7N" secondAttribute="bottom" constant="8" id="9e8-Uf-GNh"/>
                             <constraint firstItem="p0D-mX-M68" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="34" id="WeD-XL-UOK"/>
                             <constraint firstItem="p0D-mX-M68" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="acm-Ke-dIA"/>
                             <constraint firstItem="mon-21-h7N" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bZl-aH-1qX"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mon-21-h7N" secondAttribute="trailing" constant="9" id="c0x-kz-Et3"/>
                             <constraint firstItem="p0D-mX-M68" firstAttribute="top" secondItem="mon-21-h7N" secondAttribute="bottom" constant="4" id="iAQ-Zw-A1p"/>
                             <constraint firstItem="p0D-mX-M68" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kBp-dD-SEM"/>
-                            <constraint firstItem="mon-21-h7N" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="4" id="xSn-u9-ajy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -148,6 +145,7 @@
                                             <color key="titleColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
+                                            <action selector="doneTaped:" destination="OS0-fk-cAZ" eventType="touchUpInside" id="PKm-P9-4Sw"/>
                                             <segue destination="BYZ-38-t0r" kind="show" id="ksL-ax-yQN"/>
                                         </connections>
                                     </button>

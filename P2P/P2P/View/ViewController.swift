@@ -11,12 +11,7 @@
 import UIKit
 
 var myIndex = 0
-var data = [cellData]()
-
-struct cellData{
-    let image: UIImage?
-    let name: String?
-}
+var data = Data()
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate  {
     
@@ -26,7 +21,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        data = [cellData.init(image: #imageLiteral(resourceName: "IMG_1"), name: "IMG_1"),cellData.init(image: #imageLiteral(resourceName: "IMG_2"), name: "IMG_2")]
+        
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -40,7 +35,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // Setting up a tableview with customview cells
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return data.data.count
     }
     
     // Программно тоже задаем высоту каждой ячейки
@@ -62,7 +57,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
             // handle delete (by removing the data from your array and updating the tableview)
-            data.remove(at: indexPath.row)
+            data.data.remove(at: indexPath.row)
             tableView.reloadData()
         }
     }
@@ -71,8 +66,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! CustomTableViewCell
         
-        cell.imageLabel.text = data[indexPath.row].name
-        cell.imageThumbnail.image = data[indexPath.row].image
+        cell.imageLabel.text = data.data[indexPath.row].name
+        cell.imageThumbnail.image = data.data[indexPath.row].image
         cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 4
         cell.imageThumbnail.layer.cornerRadius = cell.imageThumbnail.frame.height / 2
         
@@ -91,17 +86,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @IBAction func InsertPressed(_ sender: UIButton) {
-        data.append(cellData.init(image: #imageLiteral(resourceName: "IMG_5"), name: "Chester"))
+        data.data.append(cellData.init(image: #imageLiteral(resourceName: "IMG_5"), name: "Chester"))
         
+        //print(data)
         update()
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         imagePicker.dismiss(animated: true, completion: nil)
         let imagePicked = info[UIImagePickerControllerOriginalImage] as! UIImage
-        data.append(cellData.init(image: imagePicked, name: "IMG_\(data.count)"))
+        data.data.append(cellData.init(image: imagePicked, name: "IMG_\(data.data.count+1)"))
 
+        //print(data)
         update()
+        
     }
     
     /*Other useful functions*/
