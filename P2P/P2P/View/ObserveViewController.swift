@@ -42,7 +42,6 @@ class ObserveViewController: UIViewController, UIScrollViewDelegate {
     
     @IBAction func doneTaped(_ sender: UIButton) {
         print(#function)
-        //print(data)
     }
     /*
      // MARK: - Navigation
