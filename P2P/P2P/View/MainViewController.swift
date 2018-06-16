@@ -6,16 +6,47 @@
 //  Copyright © 2018 Roma Babajanyan. All rights reserved.
 //
 
-
-//todo fix auto delete when out of image viewing
 import UIKit
 import MultipeerConnectivity
 
 var myIndex = 0
 var data = Data()
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate {
 
+
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate, MCBrowserViewControllerDelegate, MCSessionDelegate {
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        <#code#>
+    }
+    
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        <#code#>
+    }
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        <#code#>
+    }
+    
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        <#code#>
+    }
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        <#code#>
+    }
+    
+    
+
+
+    //---------------------------------------------------------------------------------------------------------------------------
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     var imagePicker: UIImagePickerController!
     
@@ -26,15 +57,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //setupConnectivity()
-        tableView.delegate = self
-        tableView.dataSource = self
         
-        //Set up MC
         peerID = MCPeerID(displayName: UIDevice.current.name)
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession.delegate = self
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,6 +73,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: - TABBLEVIEW
     // Setting up a tableview with customview cells
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.data.count
@@ -83,8 +115,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    // MARK: - BUTTONS
     
-// Image picking functions
+    @IBAction func setupTapped(_ sender: UIButton) {
+        let actionSheet = UIAlertController(title: "Connection", message: "Host or join session", preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "Host", style: .default, handler: {
+            (action: UIAlertAction) in
+            self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "CBLR", discoveryInfo: nil, session:self.mcSession)
+            self.mcAdvertiserAssistant.start()
+            
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Join", style: .default, handler: {
+            (action: UIAlertAction) in
+            let mcBrowser = MCBrowserViewController(serviceType: "CBLR", session: self.mcSession)
+            mcBrowser.delegate = self
+            
+            self.present(mcBrowser, animated: true, completion: nil)
+            
+            }))
+    }
+    
+    
+    // Image picking functions
     @IBAction func pressedAdd(_ sender: UIButton) {
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -101,6 +155,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         update()
     }
     
+    
+    // MARK: IMAGEPICKING
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         imagePicker.dismiss(animated: true, completion: nil)
         let imagePicked = info[UIImagePickerControllerOriginalImage] as! UIImage
@@ -110,62 +166,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         update()
         
     }
-
-    
-    /*Other useful functions*/
-  
-//    // White out the status bar
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return .lightContent
-//    }
     
     func update(){
         tableView.reloadData()
     }
     
-    // MARK: - MCSession delegate methods
-    
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        switch state {
-        case MCSessionState.connected:
-            print("Connected: \(peerID.displayName)")
-            
-        case MCSessionState.connecting:
-            print("Connecting: \(peerID.displayName)")
-            
-        case MCSessionState.notConnected:
-            print("Not Connected: \(peerID.displayName)")
 
-        }
-    }
-    
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        <#code#>
-    }
-    
-    
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        <#code#>
-    }
-    
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        <#code#>
-    }
-    
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        <#code#>
-    }
-    
-    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    
-    
-    
 }
 
