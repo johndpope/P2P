@@ -14,7 +14,7 @@ struct cellData{
     let name: String?
 }
 
-class Data{
+class CustomData{
     var data = [cellData]()
     
     init(){

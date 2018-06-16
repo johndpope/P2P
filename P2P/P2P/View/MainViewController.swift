@@ -10,7 +10,8 @@ import UIKit
 import MultipeerConnectivity
 
 var myIndex = 0
-var data = Data()
+var data = CustomData()
+
 
 
 
