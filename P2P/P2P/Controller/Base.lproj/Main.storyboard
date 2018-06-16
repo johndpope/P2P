@@ -119,16 +119,28 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0HU-Vo-yO7">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="19"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xb8-3n-3I6">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="19"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="p0D-mX-M68" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="2kA-Gy-kVN"/>
+                            <constraint firstItem="0HU-Vo-yO7" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="DEc-tj-2Qh"/>
                             <constraint firstItem="T7J-W8-ti6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="IEY-IN-aAf"/>
+                            <constraint firstItem="T7J-W8-ti6" firstAttribute="top" secondItem="0HU-Vo-yO7" secondAttribute="bottom" constant="6" id="LXg-XK-4Qh"/>
                             <constraint firstItem="p0D-mX-M68" firstAttribute="top" secondItem="T7J-W8-ti6" secondAttribute="bottom" constant="23" id="M8L-vp-XHX"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="T7J-W8-ti6" secondAttribute="trailing" constant="9" id="V5e-dK-tsB"/>
                             <constraint firstItem="p0D-mX-M68" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="acm-Ke-dIA"/>
                             <constraint firstItem="T7J-W8-ti6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="cVx-fT-90q"/>
                             <constraint firstItem="p0D-mX-M68" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kBp-dD-SEM"/>
+                            <constraint firstItem="0HU-Vo-yO7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="lEe-QN-qku"/>
+                            <constraint firstAttribute="trailing" secondItem="0HU-Vo-yO7" secondAttribute="trailing" id="n9H-YS-rxJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -194,18 +206,30 @@
                                     <outlet property="delegate" destination="OS0-fk-cAZ" id="WZ9-Hp-CHo"/>
                                 </connections>
                             </scrollView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6df-1L-mzA">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="19"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ybX-vr-wh1">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="19"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="WNt-PE-dKy" firstAttribute="trailing" secondItem="3pd-Zv-fWK" secondAttribute="trailing" id="3HZ-Dq-GgL"/>
                             <constraint firstItem="eoH-Lv-peJ" firstAttribute="bottom" secondItem="3pd-Zv-fWK" secondAttribute="bottom" id="5Dd-Yd-oo3"/>
+                            <constraint firstItem="WNt-PE-dKy" firstAttribute="top" secondItem="6df-1L-mzA" secondAttribute="bottom" constant="1" id="5yd-6t-aye"/>
                             <constraint firstItem="eoH-Lv-peJ" firstAttribute="top" secondItem="WNt-PE-dKy" secondAttribute="bottom" constant="13" id="Bq6-6D-tf0"/>
                             <constraint firstItem="eoH-Lv-peJ" firstAttribute="leading" secondItem="3pd-Zv-fWK" secondAttribute="leading" id="HvL-ra-BiV"/>
                             <constraint firstItem="eoH-Lv-peJ" firstAttribute="top" secondItem="3pd-Zv-fWK" secondAttribute="top" constant="45" id="LfI-KF-ukq"/>
+                            <constraint firstItem="6df-1L-mzA" firstAttribute="leading" secondItem="p2b-4N-mpT" secondAttribute="leading" id="Y6z-Uf-8cZ"/>
                             <constraint firstItem="WNt-PE-dKy" firstAttribute="leading" secondItem="3pd-Zv-fWK" secondAttribute="leading" id="guj-Is-5X1"/>
+                            <constraint firstItem="6df-1L-mzA" firstAttribute="top" secondItem="p2b-4N-mpT" secondAttribute="top" id="kW8-2y-3lC"/>
                             <constraint firstItem="WNt-PE-dKy" firstAttribute="top" secondItem="3pd-Zv-fWK" secondAttribute="top" id="kiw-Tt-oyW"/>
                             <constraint firstItem="eoH-Lv-peJ" firstAttribute="top" secondItem="WNt-PE-dKy" secondAttribute="bottom" constant="13" id="poo-Mh-3JP"/>
                             <constraint firstItem="eoH-Lv-peJ" firstAttribute="trailing" secondItem="3pd-Zv-fWK" secondAttribute="trailing" id="qPr-C5-9ul"/>
+                            <constraint firstAttribute="trailing" secondItem="6df-1L-mzA" secondAttribute="trailing" id="xJa-7g-5SE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3pd-Zv-fWK"/>
                     </view>
