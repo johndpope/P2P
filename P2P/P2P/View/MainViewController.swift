@@ -14,11 +14,14 @@ import MultipeerConnectivity
 var myIndex = 0
 var data = Data()
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate{
-    
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate, MCSessionDelegate, MCBrowserViewControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     var imagePicker: UIImagePickerController!
+    
+    var mcSession: MCSession!
+    var peerID: MCPeerID!
+    var mcAdvertiserAssistant: MCAdvertiserAssistant!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +29,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //setupConnectivity()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        //Set up MC
+        peerID = MCPeerID(displayName: UIDevice.current.name)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        mcSession.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -114,6 +122,49 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func update(){
         tableView.reloadData()
     }
+    
+    // MARK: - MCSession delegate methods
+    
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        switch state {
+        case MCSessionState.connected:
+            print("Connected: \(peerID.displayName)")
+            
+        case MCSessionState.connecting:
+            print("Connecting: \(peerID.displayName)")
+            
+        case MCSessionState.notConnected:
+            print("Not Connected: \(peerID.displayName)")
+
+        }
+    }
+    
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        <#code#>
+    }
+    
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        <#code#>
+    }
+    
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        <#code#>
+    }
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        <#code#>
+    }
+    
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
     
     
 }
