@@ -9,23 +9,26 @@
 
 //todo fix auto delete when out of image viewing
 import UIKit
+import MultipeerConnectivity
 
 var myIndex = 0
 var data = Data()
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate  {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
+
     @IBOutlet weak var tableView: UITableView!
     var imagePicker: UIImagePickerController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //setupConnectivity()
         tableView.delegate = self
         tableView.dataSource = self
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -99,9 +102,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         update()
         
     }
+
     
     /*Other useful functions*/
-//    
+  
 //    // White out the status bar
 //    override var preferredStatusBarStyle: UIStatusBarStyle {
 //        return .lightContent
@@ -110,7 +114,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func update(){
         tableView.reloadData()
     }
-
     
     
 }
