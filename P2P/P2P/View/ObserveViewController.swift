@@ -32,9 +32,9 @@ class ObserveViewController: UIViewController, UIScrollViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .lightContent
+//    }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.imageView

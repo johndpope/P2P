@@ -101,11 +101,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     /*Other useful functions*/
-    
-    // White out the status bar
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+//    
+//    // White out the status bar
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .lightContent
+//    }
     
     func update(){
         tableView.reloadData()

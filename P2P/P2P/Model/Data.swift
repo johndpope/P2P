@@ -18,8 +18,6 @@ class Data{
     var data = [cellData]()
     
     init(){
-        data = [cellData(image: #imageLiteral(resourceName: "IMG_3"), name: "IMG_1"),
-                cellData(image: #imageLiteral(resourceName: "IMG_5"), name: "IMG_2"),
-                cellData(image: #imageLiteral(resourceName: "IMG_4"), name: "IMG_3")]
+        data = []
     }
 }
