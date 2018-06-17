@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E019DE1120D6F137008744BC /* MPCManagment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E019DE1020D6F137008744BC /* MPCManagment.swift */; };
 		E070AFAE20CF323A00622BBF /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E070AFAD20CF323A00622BBF /* CustomTableViewCell.swift */; };
 		E09229B820D38E15005160B2 /* CustomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09229B720D38E15005160B2 /* CustomData.swift */; };
 		E0CE148B20D65F9700D07F1D /* NiceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CE148A20D65F9700D07F1D /* NiceButton.swift */; };
@@ -19,10 +20,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E019DE1020D6F137008744BC /* MPCManagment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCManagment.swift; sourceTree = "<group>"; };
 		E070AFAD20CF323A00622BBF /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		E09229B720D38E15005160B2 /* CustomData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomData.swift; sourceTree = "<group>"; };
 		E0CE148A20D65F9700D07F1D /* NiceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiceButton.swift; sourceTree = "<group>"; };
-		E0CE148E20D67F5800D07F1D /* SeeingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeingViewController.swift; sourceTree = "<group>"; };
+		E0CE148E20D67F5800D07F1D /* SeeingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeeingViewController.swift; path = ../Controller/SeeingViewController.swift; sourceTree = "<group>"; };
 		E0E0247920CF3134000FD2D6 /* P2P.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = P2P.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E0247C20CF3134000FD2D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0E0247E20CF3134000FD2D6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				E0E0247E20CF3134000FD2D6 /* MainViewController.swift */,
+				E0CE148E20D67F5800D07F1D /* SeeingViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -63,7 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				E0E0248020CF3134000FD2D6 /* Main.storyboard */,
-				E0CE148E20D67F5800D07F1D /* SeeingViewController.swift */,
 				E0E0248520CF3135000FD2D6 /* LaunchScreen.storyboard */,
 			);
 			path = Controller;
@@ -75,6 +77,7 @@
 				E070AFAD20CF323A00622BBF /* CustomTableViewCell.swift */,
 				E09229B720D38E15005160B2 /* CustomData.swift */,
 				E0CE148A20D65F9700D07F1D /* NiceButton.swift */,
+				E019DE1020D6F137008744BC /* MPCManagment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				E0CE148B20D65F9700D07F1D /* NiceButton.swift in Sources */,
 				E070AFAE20CF323A00622BBF /* CustomTableViewCell.swift in Sources */,
 				E09229B820D38E15005160B2 /* CustomData.swift in Sources */,
+				E019DE1120D6F137008744BC /* MPCManagment.swift in Sources */,
 				E0E0247F20CF3134000FD2D6 /* MainViewController.swift in Sources */,
 				E0E0247D20CF3134000FD2D6 /* AppDelegate.swift in Sources */,
 				E0CE148F20D67F5800D07F1D /* SeeingViewController.swift in Sources */,

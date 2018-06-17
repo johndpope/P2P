@@ -16,36 +16,63 @@ var data = CustomData()
 
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate, MCBrowserViewControllerDelegate, MCSessionDelegate {
+    
+
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        
+        switch state{
+        case MCSessionState.connected:
+            print("Connected: \(peerID.displayName) ")
+        case MCSessionState.connecting:
+            print("Connecting: \(peerID.displayName) ")
+        case MCSessionState.notConnected:
+            print("Not Connected: \(peerID.displayName) ")
+        }
+    }
+
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
+    
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {}
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {}
+    
+    func sendData(img: UIImage, txt: String ){
+        if mcSession.connectedPeers.count > 0{
+            let data = prepareData(img: img, name: txt)
+            do{
+                try mcSession.send(data as Data, toPeers: mcSession.connectedPeers, with: .reliable)
+            }catch{
+                fatalError("Could not send data")
+            }
+        }else{
+            print("you are not connected to another devices")
+        }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        
-    }
-    
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        
-    }
-    
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        
-    }
-    
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        
-    }
-    
-    
 
+    }
+    
+    func prepareData(img: UIImage) -> NSData{
+        let naming = NSString(string: name)
+        let image = UIImagePNGRepresentation(img) as! NSData
+        //var imageData: Data = UIImagePNGRepresentation(img)!
+        let dict: NSDictionary = ["img": image, "str": naming]
+        
+        let data = NSKeyedArchiver.archivedData(withRootObject: dict) as NSData
+        
+        return data
+    }
+    
 
     //---------------------------------------------------------------------------------------------------------------------------
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        
+        dismiss(animated: true, completion: nil)
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        
+        dismiss(animated: true, completion: nil)
+
     }
     
     @IBOutlet weak var tableView: UITableView!
@@ -96,14 +123,31 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if (editingStyle == UITableViewCellEditingStyle.delete) {
+//            // handle delete (by removing the data from your array and updating the tableview)
+//            data.data.remove(at: indexPath.row)
+//            tableView.reloadData()
+//        }
+//    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let share = UITableViewRowAction(style: .normal, title: "Share") { (action, index) in
+            print("share swipe tapped")
+            // prepareData()
+        }
+        
+        let del = UITableViewRowAction(style: .destructive, title: "Delete") { (action, index) in
             data.data.remove(at: indexPath.row)
+            // data.data[indexPath.row].image - image access
+            // data.data[indexPath.row].name - name access
             tableView.reloadData()
         }
+        
+        return [share,del]
     }
     
+
     // Getting the cell and configuring it
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! CustomTableViewCell
