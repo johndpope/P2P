@@ -18,7 +18,7 @@ class SeeingViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
 
         
-        imageView.image = data.data[myIndex].image
+        imageView.image = tableData.data[myIndex].image
         
         //Set up zooming
         self.scrollView.minimumZoomScale = 1.0

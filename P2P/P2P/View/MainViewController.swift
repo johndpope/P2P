@@ -10,10 +10,11 @@ import UIKit
 import MultipeerConnectivity
 
 var myIndex = 0
-var data = CustomData()
+var tableData = CustomData()
 
 
-
+/*var imageData: Data = UIImagePNGRepresentation(image)
+ var imageUIImage: UIImage = UIImage(data: imageData)*/
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate, MCBrowserViewControllerDelegate, MCSessionDelegate {
     
@@ -29,41 +30,37 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
-    
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
     
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {}
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {}
     
-    func sendData(img: UIImage, txt: String ){
-        if mcSession.connectedPeers.count > 0{
-            let data = prepareData(img: img, name: txt)
-            do{
-                try mcSession.send(data as Data, toPeers: mcSession.connectedPeers, with: .reliable)
-            }catch{
-                fatalError("Could not send data")
-            }
-        }else{
-            print("you are not connected to another devices")
-        }
-    }
-    
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
 
+        let image: UIImage = UIImage(data: data)!
+        
+        tableData.data.append(cellData.init(image: image, name: "IMG_ \(tableData.data.count+1)"))
+        
+        DispatchQueue.main.async {
+            self.updateTableView()
+        }
+        
+        
     }
     
-    func prepareData(img: UIImage) -> NSData{
-        let naming = NSString(string: name)
-        let image = UIImagePNGRepresentation(img) as! NSData
-        //var imageData: Data = UIImagePNGRepresentation(img)!
-        let dict: NSDictionary = ["img": image, "str": naming]
-        
-        let data = NSKeyedArchiver.archivedData(withRootObject: dict) as NSData
-        
-        return data
+    func sendImage(_ image: Data){
+        if mcSession.connectedPeers.count > 0{
+            do{
+                try mcSession.send(image, toPeers: mcSession.connectedPeers, with: .reliable)
+                print("Count state in send",mcSession.connectedPeers.count)
+            }catch{
+                fatalError("Unable to send data")
+            }
+        }else{
+            print("You are not connected to another devices")
+        }
     }
-    
 
     //---------------------------------------------------------------------------------------------------------------------------
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
@@ -104,7 +101,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: - TABBLEVIEW
     // Setting up a tableview with customview cells
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.data.count
+        return tableData.data.count
     }
     
     // Программно тоже задаем высоту каждой ячейки
@@ -135,25 +132,34 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let share = UITableViewRowAction(style: .normal, title: "Share") { (action, index) in
             print("share swipe tapped")
             // prepareData()
+            let image = tableData.data[indexPath.row].image
+            let dataImage = self.encodeImage(image: image!)
+            
+            self.sendImage(dataImage)
+            
         }
         
         let del = UITableViewRowAction(style: .destructive, title: "Delete") { (action, index) in
-            data.data.remove(at: indexPath.row)
+            tableData.data.remove(at: indexPath.row)
             // data.data[indexPath.row].image - image access
             // data.data[indexPath.row].name - name access
-            tableView.reloadData()
+            self.updateTableView()
         }
         
         return [share,del]
     }
     
+    func encodeImage(image: UIImage) -> Data{
+        let imageData: Data = UIImagePNGRepresentation(image)!
+        return imageData
+    }
 
     // Getting the cell and configuring it
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! CustomTableViewCell
         
-        cell.imageLabel.text = data.data[indexPath.row].name
-        cell.imageThumbnail.image = data.data[indexPath.row].image
+        cell.imageLabel.text = tableData.data[indexPath.row].name
+        cell.imageThumbnail.image = tableData.data[indexPath.row].image
         cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 4
         cell.imageThumbnail.layer.cornerRadius = cell.imageThumbnail.frame.height / 2
         
@@ -198,10 +204,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func InsertPressed(_ sender: UIButton) {
-        data.data.append(cellData.init(image: #imageLiteral(resourceName: "IMG_5"), name: "Chester"))
+        
+        tableData.data.append(cellData.init(image: #imageLiteral(resourceName: "IMG_5"), name: "Chester"))
         
         //print(data)
-        update()
+        updateTableView()
     }
     
     
@@ -209,14 +216,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         imagePicker.dismiss(animated: true, completion: nil)
         let imagePicked = info[UIImagePickerControllerOriginalImage] as! UIImage
-        data.data.append(cellData.init(image: imagePicked, name: "IMG_\(data.data.count+1)"))
-
+        tableData.data.append(cellData.init(image: imagePicked, name: "IMG_\(tableData.data.count+1)"))
         //print(data)
-        update()
+        updateTableView()
         
     }
     
-    func update(){
+    func updateTableView(){
         tableView.reloadData()
     }
     
