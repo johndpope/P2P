@@ -35,13 +35,13 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6bB-YA-7c8">
                                                     <rect key="frame" x="10" y="5" width="355" height="90"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aang" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1G-6B-MNu">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chazy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1G-6B-MNu">
                                                             <rect key="frame" x="88" y="8" width="259" height="74"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_1" translatesAutoresizingMaskIntoConstraints="NO" id="q8c-ZY-dPy">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_5" translatesAutoresizingMaskIntoConstraints="NO" id="q8c-ZY-dPy">
                                                             <rect key="frame" x="0.0" y="5" width="80" height="80"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="80" id="Ip4-4T-WhE"/>
@@ -246,10 +246,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Xd-gy-wNO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="829.60000000000002" y="133.5832083958021"/>
+            <point key="canvasLocation" x="878" y="134"/>
         </scene>
     </scenes>
     <resources>
-        <image name="IMG_1" width="2560" height="1600"/>
+        <image name="IMG_5" width="1024" height="683"/>
     </resources>
 </document>

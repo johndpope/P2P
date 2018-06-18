@@ -11,13 +11,11 @@ import UIKit
 class SeeingViewController: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
-    
     @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         imageView.image = tableData.data[myIndex].image
         
         //Set up zooming
