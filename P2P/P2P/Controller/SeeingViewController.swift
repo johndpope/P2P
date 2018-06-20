@@ -32,6 +32,8 @@ class SeeingViewController: UIViewController, UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.imageView
     }
+    
+
 
     /*
     // MARK: - Navigation

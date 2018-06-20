@@ -8,29 +8,48 @@
 
 import UIKit
 import MultipeerConnectivity
+import os.log
 
 var myIndex = 0
 var tableData = CustomData()
 
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate, MCBrowserViewControllerDelegate, MCSessionDelegate {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate{//}, MCBrowserViewControllerDelegate, MCSessionDelegate{
+    
+    func foundPeer() {
+        //tblPeers.reloadData()
+    }
+    
+    
+    func lostPeer() {
+        //tblPeers.reloadData()
+    }
+
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBOutlet weak var tableView: UITableView!
     var imagePicker: UIImagePickerController!
     
-    var mcSession: MCSession!
-    var peerID: MCPeerID!
-    var mcAdvertiserAssistant: MCAdvertiserAssistant!
+//    var peerID: MCPeerID!
+//    var mcSession: MCSession!
+//    var mcAdvertiserAssistant: MCAdvertiserAssistant!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        peerID = MCPeerID(displayName: UIDevice.current.name)
-        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
-        mcSession.delegate = self
+        // init peerID and mcSession here is OK
+//        peerID = MCPeerID(displayName: UIDevice.current.name)
+//        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+//        mcSession.delegate = self
+        
+        //appDelegate.mpcManager.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        if UIDevice.current.name == "CBLR"{
+            print("we are here advertising")
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -64,9 +83,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             print("share swipe tapped")
             // prepareData()
             let image = tableData.data[indexPath.row].image
-            let dataImage = self.encodeImage(image: image!)
+            //let dataImage = self.encodeImage(image: image!)
             
-            self.sendImage(dataImage)
+            //self.sendImage(image!)
             
         }
         
@@ -98,17 +117,19 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         actionSheet.addAction(UIAlertAction(title: "Host", style: .default, handler: {
             (action: UIAlertAction) in
-            self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "CBLR", discoveryInfo: nil, session:self.mcSession)
-            self.mcAdvertiserAssistant.start()
+            print()
+//            self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "cblr-1", discoveryInfo: nil, session:self.mcSession)
+//            self.mcAdvertiserAssistant.start()
             
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Join", style: .default, handler: {
             (action: UIAlertAction) in
-            let mcBrowser = MCBrowserViewController(serviceType: "CBLR", session: self.mcSession)
-            mcBrowser.delegate = self
-            
-            self.present(mcBrowser, animated: true, completion: nil)
+            print()
+//            let mcBrowser = MCBrowserViewController(serviceType: "cblr-1", session: self.mcSession)
+//            mcBrowser.delegate = self
+//
+//            self.present(mcBrowser, animated: true, completion: nil)
             
             }))
         
@@ -157,55 +178,59 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //MARK: MPC
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        switch state{
-        case MCSessionState.connected:
-            print("Connected: \(peerID.displayName) ")
-        case MCSessionState.connecting:
-            print("Connecting: \(peerID.displayName) ")
-        case MCSessionState.notConnected:
-            print("Not Connected: \(peerID.displayName) ")
-        }
-    }
-    
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
-    
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {}
-    
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {}
-    
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        
-        let image: UIImage = UIImage(data: data)!
-        
-        tableData.data.append(cellData.init(image: image, name: "IMG_ \(tableData.data.count+1)"))
-        
-        // running table reload from the main thread
-        DispatchQueue.main.async {
-            self.updateTableView()
-        }
-    }
-    
-    func sendImage(_ image: Data){
-        if mcSession.connectedPeers.count > 0{
-            do{
-                try mcSession.send(image, toPeers: mcSession.connectedPeers, with: .reliable)
-                print("Count state in send",mcSession.connectedPeers.count)
-            }catch{
-                fatalError("Unable to send data")
-            }
-        }else{
-            print("You are not connected to another devices")
-        }
-    }
-    
-    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true, completion: nil)
-        
-    }
+//    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+//        switch state{
+//        case MCSessionState.connected:
+//            print("Connected: \(peerID.displayName) ")
+//            os_log("CONNECTED", type: .default)
+//        case MCSessionState.connecting:
+//            print("Connecting: \(peerID.displayName) ")
+//        case MCSessionState.notConnected:
+//            print("Not Connected: \(peerID.displayName) ")
+//            os_log("NOT CONNECTED", type: .error)
+//        }
+//    }
+//    
+//    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
+//    
+//    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {}
+//    
+//    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {}
+//    
+//    
+//    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+//        
+//        if let image = UIImage(data: data){
+//            DispatchQueue.main.async {
+//                tableData.data.append(cellData.init(image: image, name: "IMG_ \(tableData.data.count+1)"))
+//                self.updateTableView()
+//            }
+//        }
+//        
+//    }
+//    
+//    func sendImage(_ image: UIImage){
+//        if mcSession.connectedPeers.count > 0{
+//            if let imageData = UIImagePNGRepresentation(image){
+//                do{
+//                    try mcSession.send(imageData, toPeers: mcSession.connectedPeers, with: .reliable)
+//                } catch let error as NSError{
+//                    os_log("FAILED TO SEND", type: .error)
+//                    let allertError = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
+//                    allertError.addAction(UIAlertAction(title: "OK", style: .default))
+//                    present(allertError, animated: true, completion: nil)
+//                }
+//            }
+//        }
+//    }
+//    
+//    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+//        dismiss(animated: true, completion: nil)
+//    }
+//    
+//    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+//        dismiss(animated: true, completion: nil)
+//        
+//    }
 
 }
