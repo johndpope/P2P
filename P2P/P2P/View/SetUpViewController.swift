@@ -10,11 +10,29 @@ import UIKit
 import MultipeerConnectivity
 
 class SetUpViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MPCManagerDelegate, MCNearbyServiceAdvertiserDelegate {
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+    
+    var isAdvertising: Bool!
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var index: Int?
+    @IBOutlet weak var tableView: UITableView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        appDelegate.mpcManager.delegate = self
+        appDelegate.mpcManager.browser.startBrowsingForPeers()
+        
+        appDelegate.mpcManager.advertiser.startAdvertisingPeer()
+        isAdvertising = true
+        
     }
     
     
-    var isAdvertising: Bool!
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+    }
     
     func invitationWasReceived(fromPeer: String) {
         let allert = UIAlertController(title: "", message: "\(fromPeer) wants to share an image with you", preferredStyle: .alert)
@@ -37,11 +55,9 @@ class SetUpViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func connectedWithPeer(peerID: MCPeerID) {
         OperationQueue.main.addOperation {
-            self.performSegue(withIdentifier: "mainPhotoSegue", sender: self)
+            self.performSegue(withIdentifier: "setupSegue", sender: self)
         }
     }
-    
-    @IBOutlet weak var tableView: UITableView!
     
     func foundPeer() {
         print(#function)
@@ -55,48 +71,12 @@ class SetUpViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.reloadData()
     }
     
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-
-        appDelegate.mpcManager.delegate = self
-        appDelegate.mpcManager.browser.startBrowsingForPeers()
-        
-        appDelegate.mpcManager.advertiser.startAdvertisingPeer()
-        isAdvertising = true
-        
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appDelegate.mpcManager.foundPeers.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "peerCell") as! SetUpCellTableViewCell
-        
-        //cell.imageLabel.text
-        
-        cell.nameLabel.text = appDelegate.mpcManager.foundPeers[indexPath.row].displayName
-        cell.cellImageView.image = #imageLiteral(resourceName: "user")
-        cell.cellView.layer.cornerRadius = cell.frame.height / 4
-        cell.cellImageView.layer.cornerRadius = cell.cellImageView.frame.height / 2
-        //print(cell)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70.0
-    }
-    
+
     @IBAction func startstopAdvertising(_ sender: Any) {
         let actionSheet = UIAlertController(title: "", message: "Change Visibility", preferredStyle: UIAlertControllerStyle.actionSheet)
         
@@ -130,11 +110,38 @@ class SetUpViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     }
     
+    // MARK: - PEERS TABLE
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedPeer = appDelegate.mpcManager.foundPeers[indexPath.row] as MCPeerID
         
         appDelegate.mpcManager.browser.invitePeer(selectedPeer, to: appDelegate.mpcManager.session, withContext: nil, timeout: 20)
+        
+        //per
+        
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return appDelegate.mpcManager.foundPeers.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "peerCell") as! SetUpCellTableViewCell
+        
+        //cell.imageLabel.text
+        
+        cell.nameLabel.text = appDelegate.mpcManager.foundPeers[indexPath.row].displayName
+        cell.cellImageView.image = #imageLiteral(resourceName: "user")
+        cell.cellView.layer.cornerRadius = cell.frame.height / 4
+        cell.cellImageView.layer.cornerRadius = cell.cellImageView.frame.height / 2
+        //print(cell)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70.0
+    }
+    
     
 
 }

@@ -10,6 +10,28 @@ import UIKit
 import MultipeerConnectivity
 import os.log
 
+
+
+
+
+
+
+//MARK: - ISSUES
+/*
+  multiple advertisers issue - working on it
+ 
+  reload table view - todo
+  terminal output errors - todo
+  multiple advertisers issue
+ 
+  editing images ?
+  sending video stream?
+ */
+
+//MARK: - BEGINING
+
+
+
 var myIndex = 0
 var tableData = CustomData()
 
@@ -78,6 +100,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         return true
     }
 
+    
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let share = UITableViewRowAction(style: .normal, title: "Share") { (action, index) in
             print("share swipe tapped")
