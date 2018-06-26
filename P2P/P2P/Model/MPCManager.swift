@@ -6,6 +6,8 @@
 //  Copyright © 2018 Roma Babajanyan. All rights reserved.
 //
 
+// Date sorting, contatins in array
+
 import UIKit
 import MultipeerConnectivity
 import os.log
@@ -51,15 +53,17 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         
         //advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: nil, serviceType: "cblr")
         //advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: ["index" : String(index), "creation_date" : String(creationDate.timeIntervalSince1970), "device" : broadcastingDeviceName, "id" : UIDevice.currentDevice().identifierForVendor!.UUIDString], serviceType: <#T##String#>)
-        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: ["creation_date": String(creationDate.timeIntervalSince1970)], serviceType: "cblr")
+        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: nil /*["creation_date": String(creationDate.timeIntervalSince1970)]*/, serviceType: "cblr")
         advertiser.delegate = self
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         
         //dump(info!)
-        print("Date of peer's creation \(info!["creation_date"])")
-        foundPeers.append(peerID)
+        if !foundPeers.contains(peerID){
+            foundPeers.append(peerID)
+
+        }
         print(#function)
         print(foundPeers)
         delegate?.foundPeer()
