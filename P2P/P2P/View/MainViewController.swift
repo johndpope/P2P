@@ -10,12 +10,6 @@ import UIKit
 import MultipeerConnectivity
 import os.log
 
-
-
-
-
-
-
 //MARK: - ISSUES
 /*
   multiple advertisers issue - working on it
@@ -29,14 +23,16 @@ import os.log
  */
 
 //MARK: - BEGINING
-
-
-
 var myIndex = 0
 var tableData = CustomData()
 
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate{//}, MCBrowserViewControllerDelegate, MCSessionDelegate{
+    
+    let recievedName = Notification.Name(rawValue: "Recieved")
+    
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     func foundPeer() {
         //tblPeers.reloadData()
@@ -47,7 +43,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         //tblPeers.reloadData()
     }
 
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBOutlet weak var tableView: UITableView!
     var imagePicker: UIImagePickerController!
@@ -69,9 +64,27 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.dataSource = self
         
-        if UIDevice.current.name == "CBLR"{
-            print("we are here advertising")
+//        if UIDevice.current.name == "CBLR"{
+//            print("we are here advertising")
+//        }
+        
+        // now we are here
+        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.recieved(_:)), name: recievedName, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func recieved(_ notification: NSNotification){
+        DispatchQueue.main.async {
+            let recievedImage = notification.object as! UIImage
+            
+            tableData.data.append(cellData(image: recievedImage, name: "IMG_\(tableData.data.count + 1)"))
+            self.tableView.reloadData()
         }
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -107,7 +120,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             // prepareData()
             let image = tableData.data[indexPath.row].image
             //let dataImage = self.encodeImage(image: image!)
-            
+            self.appDelegate.mpcManager.sendData(image: image!, toPeer: self.appDelegate.mpcManager.foundPeers[0])
             //self.sendImage(image!)
             
         }

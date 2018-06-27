@@ -8,6 +8,9 @@
 
 // Date sorting, contatins in array
 
+
+// We h
+
 import UIKit
 import MultipeerConnectivity
 import os.log
@@ -20,6 +23,8 @@ protocol MPCManagerDelegate {
     func invitationWasReceived(fromPeer: String)
     
     func connectedWithPeer(peerID: MCPeerID)
+    
+    func recievedData()
 }
 
 class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
@@ -53,7 +58,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         
         //advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: nil, serviceType: "cblr")
         //advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: ["index" : String(index), "creation_date" : String(creationDate.timeIntervalSince1970), "device" : broadcastingDeviceName, "id" : UIDevice.currentDevice().identifierForVendor!.UUIDString], serviceType: <#T##String#>)
-        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: nil /*["creation_date": String(creationDate.timeIntervalSince1970)]*/, serviceType: "cblr")
+        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: ["creation_date": String(creationDate.timeIntervalSince1970),"device": UIDevice.current.name, "id": UIDevice.current.identifierForVendor!.uuidString], serviceType: "cblr")
         advertiser.delegate = self
     }
     
@@ -90,16 +95,21 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     }
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        print(#function)
+
         self.invitationHandler = invitationHandler
         
         delegate?.invitationWasReceived(fromPeer: peerID.displayName)
     }
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
+        print(#function)
         print(error.localizedDescription)
     }
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        print(#function)
+
         switch  state {
         case MCSessionState.connected:
             print("Connected to session: \(session)")
@@ -114,33 +124,40 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     
     func sendData(image: UIImage, toPeer targetPeer: MCPeerID) -> Bool{
         print()
+        print(#function)
+
         let peersArray = NSArray(object: targetPeer)
         
         if let imageData = UIImagePNGRepresentation(image){
-            do{
+            do {
                 try session.send(imageData, toPeers: peersArray as! [MCPeerID], with: .reliable)
-            }catch {
+            } catch {
                 print("failed send data",error.localizedDescription)
             }
+            print("true")
             return true
-        }else{
+        
+        } else {
+            print("false")
             return false
         }
     }
     
-    //    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-    //
-    //        if let image = UIImage(data: data){
-    //            DispatchQueue.main.async {
-    //                tableData.data.append(cellData.init(image: image, name: "IMG_ \(tableData.data.count+1)"))
-    //                self.updateTableView()
-    //            }
-    //        }
-    //
-    //    }
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        
+        print(#function)
+        
+        //var imageUIImage: UIImage = UIImage(data: data)
+        
+        guard let imageUIImage = UIImage(data: data) else { return }
+        
+        let name = Notification.Name(rawValue: "Recieved")
+        
+        NotificationCenter.default.post(name: name, object: imageUIImage)
+    
+
     }
-//
+
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {}
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {}

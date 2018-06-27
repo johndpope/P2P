@@ -181,40 +181,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTU-lb-9go">
                                 <rect key="frame" x="16" y="25" width="350" height="53"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pGG-dW-VOn">
-                                        <rect key="frame" x="138" y="9" width="75" height="36"/>
-                                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Add...">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="9"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="pressedAdd:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qvQ-r9-qsd"/>
-                                        </connections>
-                                    </button>
-                                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mon-21-h7N">
-                                        <rect key="frame" x="8" y="8" width="75" height="36"/>
-                                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="SetUp">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="9"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="setupTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jxn-Wc-zYC"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2B-82-1e7">
-                                        <rect key="frame" x="267" y="9" width="75" height="36"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2B-82-1e7">
+                                        <rect key="frame" x="277" y="9" width="65" height="36"/>
                                         <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Insert">
@@ -229,21 +197,33 @@
                                             <action selector="InsertPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GH7-CH-kyS"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pGG-dW-VOn">
+                                        <rect key="frame" x="8" y="8" width="75" height="36"/>
+                                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Add...">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="9"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="pressedAdd:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qvQ-r9-qsd"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="pGG-dW-VOn" firstAttribute="leading" secondItem="PTU-lb-9go" secondAttribute="leading" constant="138" id="2Tx-vy-LMt"/>
-                                    <constraint firstItem="pGG-dW-VOn" firstAttribute="leading" secondItem="mon-21-h7N" secondAttribute="trailing" constant="55" id="7Vk-Nc-o58"/>
-                                    <constraint firstAttribute="bottom" secondItem="pGG-dW-VOn" secondAttribute="bottom" constant="8" id="7xz-U9-d8i"/>
+                                    <constraint firstItem="pGG-dW-VOn" firstAttribute="leading" secondItem="PTU-lb-9go" secondAttribute="leading" constant="8" id="2Tx-vy-LMt"/>
+                                    <constraint firstAttribute="bottom" secondItem="pGG-dW-VOn" secondAttribute="bottom" constant="9" id="7xz-U9-d8i"/>
                                     <constraint firstItem="T2B-82-1e7" firstAttribute="top" secondItem="PTU-lb-9go" secondAttribute="top" constant="9" id="9jg-5A-Hu5"/>
-                                    <constraint firstAttribute="trailing" secondItem="pGG-dW-VOn" secondAttribute="trailing" constant="137" id="FI5-Ij-Qcq"/>
-                                    <constraint firstAttribute="bottom" secondItem="mon-21-h7N" secondAttribute="bottom" constant="9" id="HXn-ao-20U"/>
+                                    <constraint firstAttribute="trailing" secondItem="pGG-dW-VOn" secondAttribute="trailing" constant="267" id="FI5-Ij-Qcq"/>
                                     <constraint firstAttribute="trailing" secondItem="T2B-82-1e7" secondAttribute="trailing" constant="8" id="Heb-Gp-ifu"/>
-                                    <constraint firstItem="pGG-dW-VOn" firstAttribute="top" secondItem="PTU-lb-9go" secondAttribute="top" constant="9" id="Kqf-SQ-Ots"/>
-                                    <constraint firstItem="mon-21-h7N" firstAttribute="leading" secondItem="PTU-lb-9go" secondAttribute="leading" constant="8" id="UVV-Eb-NM0"/>
-                                    <constraint firstItem="T2B-82-1e7" firstAttribute="leading" secondItem="pGG-dW-VOn" secondAttribute="trailing" constant="54" id="gJQ-YK-grh"/>
+                                    <constraint firstItem="pGG-dW-VOn" firstAttribute="top" secondItem="PTU-lb-9go" secondAttribute="top" constant="8" id="Kqf-SQ-Ots"/>
+                                    <constraint firstItem="T2B-82-1e7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pGG-dW-VOn" secondAttribute="trailing" constant="8" symbolic="YES" id="gJQ-YK-grh"/>
                                     <constraint firstAttribute="bottom" secondItem="T2B-82-1e7" secondAttribute="bottom" constant="8" id="gvM-NH-nrd"/>
-                                    <constraint firstItem="mon-21-h7N" firstAttribute="top" secondItem="PTU-lb-9go" secondAttribute="top" constant="8" id="nZN-gi-Ixn"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -294,6 +274,15 @@
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" id="RJN-Rp-bIU"/>
                                         </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2N-LP-11e">
+                                        <rect key="frame" x="275" y="9" width="75" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Edit">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
