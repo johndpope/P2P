@@ -8,8 +8,13 @@
 
 // Date sorting, contatins in array
 
+//TODO: Test cases
+// Tested case: when one of the devices closes the app, connection ends (but no notification, gotta add this), when returns back to the app, it seems that the new peer in the array establishes the connection, and the new session starts on the background. So it continues to send images correctly. Refactoring of the Multipeer Connectivity is quite done. Wrapped to the MPCManager.swift file. App uses delegation and notification patterns for app work.
 
-// We h
+// Need to fix that error with ICE etc.
+// Need to handle the reloadOfTableView, because there is a delay time sometimes when picture arrivded already, but it's not added to the tableView rapidly.
+//Figure out how to send videoStream
+//Test this thing out on more failure cases. More crititcal ones.
 
 import UIKit
 import MultipeerConnectivity
