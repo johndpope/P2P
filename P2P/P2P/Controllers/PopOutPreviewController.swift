@@ -1,27 +1,31 @@
 //
-//  SeeingViewController.swift
+//  PopOutPreviewController.swift
 //  P2P
 //
-//  Created by Roma Babajanyan on 17/06/2018.
+//  Created by Roma Babajanyan on 03/07/2018.
 //  Copyright © 2018 Roma Babajanyan. All rights reserved.
 //
 
 import UIKit
 
-class SeeingViewController: UIViewController, UIScrollViewDelegate {
+class PopOutPreviewController: UIViewController {
 
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var imageSheet: UIImageView!
+    
+    @IBAction func editTapped(_ sender: Any) {
+    }
+    
+    
+    @IBAction func exitTapped(_ sender: Any) {
+        
+        dismiss(animated: true,
+                completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        imageView.image = tableData.data[myIndex].image
-        
-        //Set up zooming
-        self.scrollView.minimumZoomScale = 1.0
-        self.scrollView.maximumZoomScale = 5.0
-        
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,12 +33,6 @@ class SeeingViewController: UIViewController, UIScrollViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return self.imageView
-    }
-    
-
-
     /*
     // MARK: - Navigation
 

@@ -31,6 +31,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     let recievedName = Notification.Name(rawValue: "Recieved")
     
+    var current: UIImage?
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -42,6 +43,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func lostPeer() {
         //tblPeers.reloadData()
     }
+    
+    
 
     
     @IBOutlet weak var tableView: UITableView!
@@ -77,14 +80,27 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @objc func recieved(_ notification: NSNotification){
+        let recievedImage = notification.object as! UIImage
+        self.current = recievedImage
+        tableData.data.append(cellData(image: recievedImage, name: "IMG_\(tableData.data.count + 1)"))
+        
+        performSegue(withIdentifier: "preview", sender: self)
         DispatchQueue.main.async {
-            let recievedImage = notification.object as! UIImage
+            //let recievedImage = notification.object as! UIImage
             
-            tableData.data.append(cellData(image: recievedImage, name: "IMG_\(tableData.data.count + 1)"))
+//            tableData.data.append(cellData(image: recievedImage, name: "IMG_\(tableData.data.count + 1)"))
             self.tableView.reloadData()
         }
         
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let previewVC = segue.destination as? PopOutPreviewController{
+            if let image = self.current{
+                previewVC.imageSheet.image = image
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -211,6 +227,28 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func encodeImage(image: UIImage) -> Data{
         let imageData: Data = UIImagePNGRepresentation(image)!
         return imageData
+    }
+    
+    
+    //MARK: TOOLBAR ACTIONS
+    
+    @IBAction func addTapped(_ sender: Any) {
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func refreshTapped(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    @IBAction func settingsTapped(_ sender: Any){
+        // Unwind segue to the 1st screen
     }
     
     //MARK: MPC

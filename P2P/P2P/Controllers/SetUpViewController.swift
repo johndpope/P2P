@@ -132,13 +132,11 @@ class SetUpViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "peerCell") as! SetUpCellTableViewCell
         
-        //cell.imageLabel.text
+        cell.cellText.text = appDelegate.mpcManager.foundPeers[indexPath.row].displayName
         
-        cell.nameLabel.text = appDelegate.mpcManager.foundPeers[indexPath.row].displayName
-        cell.cellImageView.image = #imageLiteral(resourceName: "user")
-        cell.cellView.layer.cornerRadius = cell.frame.height / 4
-        cell.cellImageView.layer.cornerRadius = cell.cellImageView.frame.height / 2
-        //print(cell)
+        cell.layer.borderWidth = 1.0
+        cell.layer.borderColor = UIColor.gray.cgColor
+
         return cell
     }
     

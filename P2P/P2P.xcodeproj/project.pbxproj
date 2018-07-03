@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E031565A20EBBD7E0050495F /* PopOutPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E031565920EBBD7E0050495F /* PopOutPreviewController.swift */; };
 		E070AFAE20CF323A00622BBF /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E070AFAD20CF323A00622BBF /* CustomTableViewCell.swift */; };
 		E09229B820D38E15005160B2 /* CustomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09229B720D38E15005160B2 /* CustomData.swift */; };
 		E0A7D71620D8D1C2007E5678 /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7D71520D8D1C2007E5678 /* MPCManager.swift */; };
@@ -14,6 +15,7 @@
 		E0A7D71C20DA61B3007E5678 /* SetUpCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7D71B20DA61B3007E5678 /* SetUpCellTableViewCell.swift */; };
 		E0AF3B7020DE87A70079DC3B /* MCSessionManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AF3B6F20DE87A70079DC3B /* MCSessionManagement.swift */; };
 		E0AF3B8D20E265130079DC3B /* ImageStockSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AF3B8C20E265130079DC3B /* ImageStockSession.swift */; };
+		E0B1E17D20EBD30700B3DCC9 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B1E17C20EBD30700B3DCC9 /* Photo.swift */; };
 		E0CE148B20D65F9700D07F1D /* NiceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CE148A20D65F9700D07F1D /* NiceButton.swift */; };
 		E0CE148F20D67F5800D07F1D /* SeeingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CE148E20D67F5800D07F1D /* SeeingViewController.swift */; };
 		E0E0247D20CF3134000FD2D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0247C20CF3134000FD2D6 /* AppDelegate.swift */; };
@@ -24,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E031565920EBBD7E0050495F /* PopOutPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOutPreviewController.swift; sourceTree = "<group>"; };
 		E070AFAD20CF323A00622BBF /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		E09229B720D38E15005160B2 /* CustomData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomData.swift; sourceTree = "<group>"; };
 		E0A7D71520D8D1C2007E5678 /* MPCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
@@ -31,8 +34,9 @@
 		E0A7D71B20DA61B3007E5678 /* SetUpCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpCellTableViewCell.swift; sourceTree = "<group>"; };
 		E0AF3B6F20DE87A70079DC3B /* MCSessionManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCSessionManagement.swift; sourceTree = "<group>"; };
 		E0AF3B8C20E265130079DC3B /* ImageStockSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStockSession.swift; sourceTree = "<group>"; };
+		E0B1E17C20EBD30700B3DCC9 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		E0CE148A20D65F9700D07F1D /* NiceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiceButton.swift; sourceTree = "<group>"; };
-		E0CE148E20D67F5800D07F1D /* SeeingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeeingViewController.swift; path = ../Controller/SeeingViewController.swift; sourceTree = "<group>"; };
+		E0CE148E20D67F5800D07F1D /* SeeingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeingViewController.swift; sourceTree = "<group>"; };
 		E0E0247920CF3134000FD2D6 /* P2P.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = P2P.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E0247C20CF3134000FD2D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0E0247E20CF3134000FD2D6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -56,9 +60,10 @@
 		E09229B320D30D40005160B2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E0A7D71720D8DB6C007E5678 /* SetUpViewController.swift */,
-				E0E0247E20CF3134000FD2D6 /* MainViewController.swift */,
-				E0CE148E20D67F5800D07F1D /* SeeingViewController.swift */,
+				E070AFAD20CF323A00622BBF /* CustomTableViewCell.swift */,
+				E0A7D71B20DA61B3007E5678 /* SetUpCellTableViewCell.swift */,
+				E0E0248020CF3134000FD2D6 /* Main.storyboard */,
+				E0E0248520CF3135000FD2D6 /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -71,25 +76,26 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		E09229B520D30D68005160B2 /* Controller */ = {
+		E09229B520D30D68005160B2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E0E0248020CF3134000FD2D6 /* Main.storyboard */,
-				E0E0248520CF3135000FD2D6 /* LaunchScreen.storyboard */,
+				E0A7D71720D8DB6C007E5678 /* SetUpViewController.swift */,
+				E0E0247E20CF3134000FD2D6 /* MainViewController.swift */,
+				E0CE148E20D67F5800D07F1D /* SeeingViewController.swift */,
+				E031565920EBBD7E0050495F /* PopOutPreviewController.swift */,
 			);
-			path = Controller;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		E09229B620D30E4D005160B2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E070AFAD20CF323A00622BBF /* CustomTableViewCell.swift */,
-				E0A7D71B20DA61B3007E5678 /* SetUpCellTableViewCell.swift */,
 				E09229B720D38E15005160B2 /* CustomData.swift */,
 				E0CE148A20D65F9700D07F1D /* NiceButton.swift */,
 				E0A7D71520D8D1C2007E5678 /* MPCManager.swift */,
 				E0AF3B6F20DE87A70079DC3B /* MCSessionManagement.swift */,
 				E0AF3B8C20E265130079DC3B /* ImageStockSession.swift */,
+				E0B1E17C20EBD30700B3DCC9 /* Photo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -115,7 +121,7 @@
 			children = (
 				E09229B620D30E4D005160B2 /* Model */,
 				E09229B320D30D40005160B2 /* View */,
-				E09229B520D30D68005160B2 /* Controller */,
+				E09229B520D30D68005160B2 /* Controllers */,
 				E09229B420D30D5A005160B2 /* App */,
 				E0E0248320CF3135000FD2D6 /* Assets.xcassets */,
 				E0E0248820CF3135000FD2D6 /* Info.plist */,
@@ -195,10 +201,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0A7D71C20DA61B3007E5678 /* SetUpCellTableViewCell.swift in Sources */,
+				E031565A20EBBD7E0050495F /* PopOutPreviewController.swift in Sources */,
 				E0AF3B7020DE87A70079DC3B /* MCSessionManagement.swift in Sources */,
 				E0CE148B20D65F9700D07F1D /* NiceButton.swift in Sources */,
 				E070AFAE20CF323A00622BBF /* CustomTableViewCell.swift in Sources */,
 				E09229B820D38E15005160B2 /* CustomData.swift in Sources */,
+				E0B1E17D20EBD30700B3DCC9 /* Photo.swift in Sources */,
 				E0E0247F20CF3134000FD2D6 /* MainViewController.swift in Sources */,
 				E0A7D71820D8DB6C007E5678 /* SetUpViewController.swift in Sources */,
 				E0AF3B8D20E265130079DC3B /* ImageStockSession.swift in Sources */,

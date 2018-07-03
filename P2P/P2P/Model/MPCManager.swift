@@ -32,6 +32,16 @@ protocol MPCManagerDelegate {
     func recievedData()
 }
 
+protocol MPCEventsNotifier{
+    func connectionEstablished()
+    
+    func connectionLost()
+    
+    func connectionPausedAlert()
+    
+    
+}
+
 class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
     var session: MCSession!
     var peer: MCPeerID!
@@ -118,6 +128,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         switch  state {
         case MCSessionState.connected:
             print("Connected to session: \(session)")
+            // Delegation to the setup view controller to display the alert to the user 
             delegate?.connectedWithPeer(peerID: peerID)
         case MCSessionState.connecting:
             print("Connecting to session: \(session)")
