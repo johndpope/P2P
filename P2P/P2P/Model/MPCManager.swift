@@ -85,8 +85,8 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         //dump(info!)
         if !foundPeers.contains(peerID){
             foundPeers.append(peerID)
-
         }
+        
         print(#function)
         print(foundPeers)
         MPCDelegate?.foundPeer()
