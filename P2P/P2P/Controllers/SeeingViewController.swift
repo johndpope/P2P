@@ -38,8 +38,16 @@ class SeeingViewController: UIViewController, UIScrollViewDelegate {
         return self.imageView
     }
     
-
-
+    @IBAction func saveTapped(_ sender: Any) {
+        if let data = UIImageJPEGRepresentation(imageView.image!, 0.5){
+            let filename = getDocumentsDirectory().appendingPathComponent("img.jpeg")
+            try? data.write(to: filename)
+        }
+    }
+    
+    func getDocumentsDirectory() -> URL{
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    }
     /*
     // MARK: - Navigation
 

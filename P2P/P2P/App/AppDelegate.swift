@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         mpcManager = MPCManager()
+        print(getDocumentsDirectory())
         return true
     }
 
@@ -44,6 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func getDocumentsDirectory() -> URL{
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    }
 
 }
 

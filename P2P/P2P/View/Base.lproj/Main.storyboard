@@ -142,6 +142,12 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <items>
                                     <barButtonItem title="Edit" id="7BX-ri-w3Z"/>
+                                    <barButtonItem width="94" style="plain" systemItem="fixedSpace" id="Del-xF-OrP"/>
+                                    <barButtonItem systemItem="save" id="8YP-Mw-m5g">
+                                        <connections>
+                                            <action selector="saveTapped:" destination="1hL-it-bm9" id="4qR-FA-dpf"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="UnI-tQ-eeb"/>
                                     <barButtonItem systemItem="stop" id="Itp-2e-Dh0">
                                         <connections>
@@ -200,6 +206,7 @@
                                             <action selector="refreshTapped:" destination="yIp-l5-Hcq" id="dcY-ih-wfM"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="yEA-FY-lFR"/>
                                     <barButtonItem width="136" style="plain" systemItem="fixedSpace" id="bLE-qH-SMZ"/>
                                     <barButtonItem systemItem="stop" id="4Ud-8F-0nG">
                                         <connections>
