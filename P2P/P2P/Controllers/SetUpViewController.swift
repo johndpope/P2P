@@ -9,7 +9,16 @@
 import UIKit
 import MultipeerConnectivity
 
-class SetUpViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MPCManagerDelegate, MCNearbyServiceAdvertiserDelegate {
+class SetUpViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MPCManagerDelegate, MCNearbyServiceAdvertiserDelegate{
+    
+    func connectionLost() {
+        
+    }
+    
+    func connectionPausedAlert() {
+        
+    }
+    
     
     var isAdvertising: Bool!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -22,7 +31,7 @@ class SetUpViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.delegate = self
         tableView.dataSource = self
         
-        appDelegate.mpcManager.delegate = self
+        appDelegate.mpcManager.MPCDelegate = self
         appDelegate.mpcManager.browser.startBrowsingForPeers()
         
         appDelegate.mpcManager.advertiser.startAdvertisingPeer()
@@ -47,6 +56,20 @@ class SetUpViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         allert.addAction(acceptAction)
         allert.addAction(declineAction)
+        
+        OperationQueue.main.addOperation { () -> Void in
+            self.present(allert, animated: true, completion: nil)
+        }
+    }
+    
+    func connectionEstablished(peerID: MCPeerID){
+        let allert = UIAlertController(title: "ALERT", message: "Connection established", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { (alertAction) -> Void in
+            self.connectedWithPeer(peerID: peerID)
+        }
+        
+        allert.addAction(okAction)
         
         OperationQueue.main.addOperation { () -> Void in
             self.present(allert, animated: true, completion: nil)

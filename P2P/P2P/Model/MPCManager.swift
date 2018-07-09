@@ -30,11 +30,8 @@ protocol MPCManagerDelegate {
     func connectedWithPeer(peerID: MCPeerID)
     
     func recievedData()
-}
-
-protocol MPCEventsNotifier{
     
-    func connectionEstablished()
+    func connectionEstablished(peerID: MCPeerID)
     
     func connectionLost()
     
@@ -58,8 +55,8 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
 //    var broadcastingDeviceName : String
     
     
-    var delegate: MPCManagerDelegate?
-    
+    var MPCDelegate: MPCManagerDelegate?
+
     override init(){
         super.init()
         
@@ -87,7 +84,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         }
         print(#function)
         print(foundPeers)
-        delegate?.foundPeer()
+        MPCDelegate?.foundPeer()
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
@@ -102,7 +99,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
                 break
             }
         }
-        delegate?.lostPeer()
+        MPCDelegate?.lostPeer()
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
@@ -115,7 +112,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
 
         self.invitationHandler = invitationHandler
         
-        delegate?.invitationWasReceived(fromPeer: peerID.displayName)
+        MPCDelegate?.invitationWasReceived(fromPeer: peerID.displayName)
     }
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
@@ -129,8 +126,11 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         switch  state {
         case MCSessionState.connected:
             print("Connected to session: \(session)")
-            // Delegation to the setup view controller to display the alert to the user 
-            delegate?.connectedWithPeer(peerID: peerID)
+            // Delegation to the setup view controller to display the alert to the user
+            MPCDelegate?.connectionEstablished(peerID: peerID)
+            //MPCDelegate?.connectedWithPeer(peerID: peerID)
+            
+            
         case MCSessionState.connecting:
             print("Connecting to session: \(session)")
             
