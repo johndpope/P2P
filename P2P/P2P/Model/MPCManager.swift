@@ -35,7 +35,7 @@ protocol MPCManagerDelegate {
     
     func connectionLost()
     
-    func connectionPausedAlert()
+    //func connectionPausedAlert()
 }
 
 class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {

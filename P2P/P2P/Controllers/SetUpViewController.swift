@@ -15,9 +15,9 @@ class SetUpViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
     
-    func connectionPausedAlert() {
-        
-    }
+//    func connectionPausedAlert() {
+//
+//    }
     
     
     var isAdvertising: Bool!
