@@ -136,6 +136,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
             
         default:
             print("Did not connect to session: \(session)")
+            // unwind segue
         }
     }
     

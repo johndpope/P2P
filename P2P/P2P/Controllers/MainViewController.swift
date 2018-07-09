@@ -79,6 +79,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    func uwind(segue: UIStoryboardSegue){}
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -182,9 +184,17 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.tableView.reloadData()
         }
     }
-    
-    @IBAction func setTapped(_ sender: Any) {
-        //disconnect from the session. Unwind to the setUp Screen
+//
+//    @IBAction func unwindSetUpSegue(segue:UIStoryboardSegue) {
+//        //disconnect from the session.
+//        //Unwind to the setUp Screen. 1st stop
+//        performSegue(withIdentifier: "unwindToSetUp", sender: nil)
+//    }
+//
+    @IBAction func doneTapped(_ sender: Any) {
+        self.dismiss(animated: true) {
+            self.appDelegate.mpcManager.session.disconnect()
+        }
     }
     
     
