@@ -38,6 +38,10 @@ protocol MPCManagerDelegate {
     //func connectionPausedAlert()
 }
 
+protocol MPCConnectionDelegate{
+    func connectionLost()
+}
+
 class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
     
     var session: MCSession!
@@ -50,12 +54,14 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     var invitationHandler: ((Bool, MCSession!)->Void)!
     
     // for handling multiadvertisers issue
-//    var index: Int?
+    //    var index: Int?
       var creationDate = NSDate()
-//    var broadcastingDeviceName : String
+    //    var broadcastingDeviceName : String
     
     
     var MPCDelegate: MPCManagerDelegate?
+    
+    var MPCCDelegate: MPCConnectionDelegate?
 
     override init(){
         super.init()
@@ -134,9 +140,9 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         case MCSessionState.connecting:
             print("Connecting to session: \(session)")
             
-        default:
-            print("Did not connect to session: \(session)")
-            // unwind segue
+        case MCSessionState.notConnected:
+            print("Not connected to session \(session)")
+            MPCCDelegate?.connectionLost()
         }
     }
     

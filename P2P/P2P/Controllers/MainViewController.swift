@@ -13,7 +13,7 @@ import MultipeerConnectivity
 var myIndex = 0
 var tableData = CustomData()
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate, MPCConnectionDelegate{
 
     let recievedName = Notification.Name(rawValue: "Recieved")
     
@@ -21,21 +21,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
-    func foundPeer() {
-        //tblPeers.reloadData()
-    }
-    
-    
-    func lostPeer() {
-        //tblPeers.reloadData()
-    }
-    
     @IBOutlet weak var tableView: UITableView!
     //var imagePicker: UIImagePickerController!
     var picker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        appDelegate.mpcManager.MPCCDelegate = self
+        
         
         picker.delegate = self
         tableView.delegate = self
@@ -47,6 +41,30 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    //    func foundPeer() {
+    //        //tblPeers.reloadData()
+    //    }
+    //
+    //
+    //    func lostPeer() {
+    //        //tblPeers.reloadData()
+    //    }
+    
+    func connectionLost(){
+        print(#function)
+        let connectionAllert = UIAlertController(title: "WARNING", message: "CONNECTION WAS LOST", preferredStyle: .alert)
+        
+        let reconnectButton = UIAlertAction(title: "Reconnect", style: .default) { (reconnectAlert) in
+            self.dismiss(animated: true)
+        }
+        
+        connectionAllert.addAction(reconnectButton)
+        
+        OperationQueue.main.addOperation {
+            self.present(connectionAllert, animated: true, completion: nil)
+        }
     }
     
     

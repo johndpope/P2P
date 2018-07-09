@@ -10,15 +10,16 @@ import UIKit
 import MultipeerConnectivity
 
 class SetUpViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MPCManagerDelegate, MCNearbyServiceAdvertiserDelegate{
-    
     func connectionLost() {
-        
     }
+    
     
 //    func connectionPausedAlert() {
 //
 //    }
     
+    
+    //TODO: - DEFINE ORDER OF CALLING DELEGATE METHOFS IN MPCMANAGER
     
     var isAdvertising: Bool!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -63,7 +64,7 @@ class SetUpViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func connectionEstablished(peerID: MCPeerID){
-        let allert = UIAlertController(title: "ALERT", message: "Connection established", preferredStyle: .alert)
+        let allert = UIAlertController(title: "Success!", message: "Connection established!", preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "OK", style: .default) { (alertAction) -> Void in
             self.connectedWithPeer(peerID: peerID)
