@@ -182,7 +182,6 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        
         print(#function)
         
         //var imageUIImage: UIImage = UIImage(data: data)
@@ -193,8 +192,6 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         let name = Notification.Name(rawValue: "Recieved")
         
         NotificationCenter.default.post(name: name, object: imageUIImage)
-    
-
     }
 
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
