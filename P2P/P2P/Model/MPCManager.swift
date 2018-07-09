@@ -9,7 +9,7 @@
 // Date sorting, contatins in array
 
 //TODO: Test cases
-// Tested case: when one of the devices closes the app, connection ends (but no notification, gotta add this), when returns back to the app, it seems that the new peer in the array establishes the connection, and the new session starts on the background. So it continues to send images correctly. Refactoring of the Multipeer Connectivity is quite done. Wrapped to the MPCManager.swift file. App uses delegation and notification patterns for app work.
+// Tested case: when one of the devices closes the app, connection ends (but no notification, gotta add this), when returns back to the app, it seems that the new peer in the array establishes the connection, and the new session starts on the background (NEED TO FIND OUT WHETTHER OLD SESSION REMAINS LAUNCHES OR NOT). So it continues to send images correctly. Refactoring of the Multipeer Connectivity is quite done. Wrapped to the MPCManager.swift file. App uses delegation and notification patterns for app work.
 
 // Need to fix that error with ICE etc.
 // Need to handle the reloadOfTableView, because there is a delay time sometimes when picture arrivded already, but it's not added to the tableView rapidly.
@@ -33,16 +33,16 @@ protocol MPCManagerDelegate {
 }
 
 protocol MPCEventsNotifier{
+    
     func connectionEstablished()
     
     func connectionLost()
     
     func connectionPausedAlert()
-    
-    
 }
 
 class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
+    
     var session: MCSession!
     var peer: MCPeerID!
     var browser: MCNearbyServiceBrowser!
@@ -79,6 +79,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         
+        // ? guard !foundPeers.contains(peerID) else {return }
         //dump(info!)
         if !foundPeers.contains(peerID){
             foundPeers.append(peerID)
@@ -144,7 +145,21 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
 
         let peersArray = NSArray(object: targetPeer)
         
-        if let imageData = UIImagePNGRepresentation(image){
+        // MARK: - IMAGE COMPRESSION ISSUE
+//        if let imageData = UIImagePNGRepresentation(image){
+//            do {
+//                try session.send(imageData, toPeers: peersArray as! [MCPeerID], with: .reliable)
+//            } catch {
+//                print("failed send data",error.localizedDescription)
+//            }
+//            print("true")
+//            return true
+//        
+//        } else {
+//            print("false")
+//            return false
+//        }
+        if let imageData = UIImageJPEGRepresentation(image, 0.5){
             do {
                 try session.send(imageData, toPeers: peersArray as! [MCPeerID], with: .reliable)
             } catch {
@@ -152,11 +167,12 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
             }
             print("true")
             return true
-        
+            
         } else {
             print("false")
             return false
         }
+
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
@@ -166,6 +182,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         //var imageUIImage: UIImage = UIImage(data: data)
         
         guard let imageUIImage = UIImage(data: data) else { return }
+        
         
         let name = Notification.Name(rawValue: "Recieved")
         

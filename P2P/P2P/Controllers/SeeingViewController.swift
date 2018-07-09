@@ -23,11 +23,12 @@ class SeeingViewController: UIViewController, UIScrollViewDelegate {
         self.scrollView.maximumZoomScale = 5.0
         
     }
-    
-    @IBAction func doneTapped(_ sender: Any){
-        dismiss(animated: true, completion: nil)
+    @IBAction func doneTapped(_ sender: Any) {
+                dismiss(animated: true, completion: nil)
+        
+        // UNWIND TO SETUP
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

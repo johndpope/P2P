@@ -134,8 +134,8 @@ class SetUpViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         cell.cellText.text = appDelegate.mpcManager.foundPeers[indexPath.row].displayName
         
-        cell.layer.borderWidth = 1.0
-        cell.layer.borderColor = UIColor.gray.cgColor
+//        cell.layer.borderWidth = 1.0
+//        cell.layer.borderColor = UIColor.gray.cgColor
 
         return cell
     }

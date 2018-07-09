@@ -1,34 +1,20 @@
 //
-//  ViewController.swift
+//  MViewController.swift
 //  P2P
 //
-//  Created by Roma Babajanyan on 11/06/2018.
+//  Created by Roma Babajanyan on 04/07/2018.
 //  Copyright © 2018 Roma Babajanyan. All rights reserved.
 //
 
 import UIKit
 import MultipeerConnectivity
-import os.log
 
-//MARK: - ISSUES
-/*
-  multiple advertisers issue - working on it
- 
-  reload table view - todo
-  terminal output errors - todo
-  multiple advertisers issue
- 
-  editing images ?
-  sending video stream?
- */
 
-//MARK: - BEGINING
 var myIndex = 0
 var tableData = CustomData()
 
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate{//}, MCBrowserViewControllerDelegate, MCSessionDelegate{
-    
     let recievedName = Notification.Name(rawValue: "Recieved")
     
     var current: UIImage?
@@ -44,63 +30,53 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         //tblPeers.reloadData()
     }
     
-    
-
-    
     @IBOutlet weak var tableView: UITableView!
-    var imagePicker: UIImagePickerController!
+    //var imagePicker: UIImagePickerController!
+    var picker = UIImagePickerController()
     
-//    var peerID: MCPeerID!
-//    var mcSession: MCSession!
-//    var mcAdvertiserAssistant: MCAdvertiserAssistant!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // init peerID and mcSession here is OK
-//        peerID = MCPeerID(displayName: UIDevice.current.name)
-//        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
-//        mcSession.delegate = self
-        
-        //appDelegate.mpcManager.delegate = self
-        
+        picker.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         
-//        if UIDevice.current.name == "CBLR"{
-//            print("we are here advertising")
-//        }
-        
-        // now we are here
-        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.recieved(_:)), name: recievedName, object: nil)
+        // Do any additional setup after loading the view.
+         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.recieved(_:)), name: recievedName, object: nil)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
+    
+    // MARK: - NIL ISSUE
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let previewVC = segue.destination as? PopOutPreviewController{
+                print(current ?? "NIIIIIL")
+            if let img = current{
+                previewVC.imageSheet?.image = img
+            }
+                //previewVC.imageSheet?.image = current!
+        }
+    }
+    
     @objc func recieved(_ notification: NSNotification){
         let recievedImage = notification.object as! UIImage
-        self.current = recievedImage
+        //print(recievedImage,"\n\n\n\n\n\n\n\n\n")
+        current = recievedImage
+        //print(current)
         tableData.data.append(cellData(image: recievedImage, name: "IMG_\(tableData.data.count + 1)"))
         
-        performSegue(withIdentifier: "preview", sender: self)
+        //performSegue(withIdentifier: "modalySegue", sender: self)
         DispatchQueue.main.async {
             //let recievedImage = notification.object as! UIImage
             
-//            tableData.data.append(cellData(image: recievedImage, name: "IMG_\(tableData.data.count + 1)"))
+            //            tableData.data.append(cellData(image: recievedImage, name: "IMG_\(tableData.data.count + 1)"))
             self.tableView.reloadData()
         }
+     
         
-        
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let previewVC = segue.destination as? PopOutPreviewController{
-            if let image = self.current{
-                previewVC.imageSheet.image = image
-            }
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -114,11 +90,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         return tableData.data.count
     }
     
-    // Программно тоже задаем высоту каждой ячейки
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 100.0
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         myIndex = indexPath.row
         performSegue(withIdentifier: "segue", sender: self)
@@ -128,7 +103,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-
+    
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let share = UITableViewRowAction(style: .normal, title: "Share") { (action, index) in
@@ -145,7 +120,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             tableData.data.remove(at: indexPath.row)
             // data.data[indexPath.row].image - image access
             // data.data[indexPath.row].name - name access
-            self.updateTableView()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
         
         return [share,del]
@@ -153,66 +128,26 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // Getting the cell and configuring it
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! CustomTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customPhotoCell")  as! MainTableViewCell
         
-        cell.imageLabel.text = tableData.data[indexPath.row].name
-        cell.imageThumbnail.image = tableData.data[indexPath.row].image
-        cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 4
-        cell.imageThumbnail.layer.cornerRadius = cell.imageThumbnail.frame.height / 2
+        cell.cellLabel.text = tableData.data[indexPath.row].name
+        cell.cellImage.image = tableData.data[indexPath.row].image
+        cell.cellImage.layer.cornerRadius = cell.cellImage.frame.height / 2
+        cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 3
+
         
         return cell
     }
-    
-    // MARK: - BUTTONS
-    @IBAction func setupTapped(_ sender: UIButton) {
-        let actionSheet = UIAlertController(title: "Connection", message: "Host or join session", preferredStyle: .actionSheet)
-        
-        actionSheet.addAction(UIAlertAction(title: "Host", style: .default, handler: {
-            (action: UIAlertAction) in
-            print()
-//            self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "cblr-1", discoveryInfo: nil, session:self.mcSession)
-//            self.mcAdvertiserAssistant.start()
-            
-        }))
-        
-        actionSheet.addAction(UIAlertAction(title: "Join", style: .default, handler: {
-            (action: UIAlertAction) in
-            print()
-//            let mcBrowser = MCBrowserViewController(serviceType: "cblr-1", session: self.mcSession)
-//            mcBrowser.delegate = self
-//
-//            self.present(mcBrowser, animated: true, completion: nil)
-            
-            }))
-        
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        self.present(actionSheet, animated: true, completion: nil)
-    }
-    
-    // Image picking functions
-    @IBAction func pressedAdd(_ sender: UIButton) {
-        imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-        
-        present(imagePicker, animated: true, completion: nil)
-    }
-    
-    @IBAction func InsertPressed(_ sender: UIButton) {
-        
-        tableData.data.append(cellData.init(image: #imageLiteral(resourceName: "IMG_5"), name: "Chester"))
-        
-        //print(data)
-        updateTableView()
-    }
-    
+
     // MARK: IMAGEPICKING
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        imagePicker.dismiss(animated: true, completion: nil)
-        let imagePicked = info[UIImagePickerControllerOriginalImage] as! UIImage
-        tableData.data.append(cellData.init(image: imagePicked, name: "IMG_\(tableData.data.count+1)"))
+        if let imagePicked = info[UIImagePickerControllerOriginalImage]{
+            let img = imagePicked as! UIImage
+            tableData.data.append(cellData.init(image: img, name: "IMG_\(tableData.data.count+1)"))
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+        
         //print(data)
         updateTableView()
         
@@ -231,15 +166,16 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     //MARK: TOOLBAR ACTIONS
-    
     @IBAction func addTapped(_ sender: Any) {
-        imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
+        picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = false
+        picker.sourceType = .photoLibrary
         
-        present(imagePicker, animated: true, completion: nil)
+        present(picker, animated: true, completion: nil)
     }
+    
+    
     
     @IBAction func refreshTapped(_ sender: Any) {
         DispatchQueue.main.async {
@@ -247,64 +183,19 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    @IBAction func settingsTapped(_ sender: Any){
-        // Unwind segue to the 1st screen
+    @IBAction func setTapped(_ sender: Any) {
+        //disconnect from the session. Unwind to the setUp Screen
     }
     
-    //MARK: MPC
-//    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-//        switch state{
-//        case MCSessionState.connected:
-//            print("Connected: \(peerID.displayName) ")
-//            os_log("CONNECTED", type: .default)
-//        case MCSessionState.connecting:
-//            print("Connecting: \(peerID.displayName) ")
-//        case MCSessionState.notConnected:
-//            print("Not Connected: \(peerID.displayName) ")
-//            os_log("NOT CONNECTED", type: .error)
-//        }
-//    }
-//    
-//    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
-//    
-//    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {}
-//    
-//    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {}
-//    
-//    
-//    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-//        
-//        if let image = UIImage(data: data){
-//            DispatchQueue.main.async {
-//                tableData.data.append(cellData.init(image: image, name: "IMG_ \(tableData.data.count+1)"))
-//                self.updateTableView()
-//            }
-//        }
-//        
-//    }
-//    
-//    func sendImage(_ image: UIImage){
-//        if mcSession.connectedPeers.count > 0{
-//            if let imageData = UIImagePNGRepresentation(image){
-//                do{
-//                    try mcSession.send(imageData, toPeers: mcSession.connectedPeers, with: .reliable)
-//                } catch let error as NSError{
-//                    os_log("FAILED TO SEND", type: .error)
-//                    let allertError = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
-//                    allertError.addAction(UIAlertAction(title: "OK", style: .default))
-//                    present(allertError, animated: true, completion: nil)
-//                }
-//            }
-//        }
-//    }
-//    
-//    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-//        dismiss(animated: true, completion: nil)
-//    }
-//    
-//    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-//        dismiss(animated: true, completion: nil)
-//        
-//    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 }
