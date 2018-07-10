@@ -5,7 +5,7 @@
 //  Created by Roma Babajanyan on 19/06/2018.
 //  Copyright © 2018 Roma Babajanyan. All rights reserved.
 //
-// XUi
+// XU
 // Date sorting, contatins in array
 
 //TODO: Test cases
