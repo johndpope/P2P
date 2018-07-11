@@ -59,13 +59,13 @@ class SeeingViewController: UIViewController, UIScrollViewDelegate {
     }
     */
     
-    @IBAction func editTapped(_ sender: Any){
-        UIGraphicsBeginImageContext((imageView.image?.size)!)
-        let context = UIGraphicsGetCurrentContext()
-        
-        imageView.image?.draw(in: CGRect(x: 0, y: 0, width: imageView.frame.size.width, height: imageView.frame.size.height))
-        
-        context?.move(to: <#T##CGPoint#>)
-    }
+//    @IBAction func editTapped(_ sender: Any){
+//        UIGraphicsBeginImageContext((imageView.image?.size)!)
+//        let context = UIGraphicsGetCurrentContext()
+//        
+//        imageView.image?.draw(in: CGRect(x: 0, y: 0, width: imageView.frame.size.width, height: imageView.frame.size.height))
+//        
+//        context?.move(to: <#T##CGPoint#>)
+//    }
 
 }

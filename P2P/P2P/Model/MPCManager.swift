@@ -19,28 +19,6 @@ import UIKit
 import MultipeerConnectivity
 import os.log
 
-protocol MPCManagerDelegate {
-    func foundPeer()
-    
-    func lostPeer()
-    
-    func invitationWasReceived(fromPeer: String)
-    
-    func connectedWithPeer(peerID: MCPeerID)
-    
-    func recievedData()
-    
-    func connectionEstablished(peerID: MCPeerID)
-    
-    func connectionLost()
-    
-    //func connectionPausedAlert()
-}
-
-protocol MPCConnectionDelegate{
-    func connectionLost()
-}
-
 class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
     
     var session: MCSession!

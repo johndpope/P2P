@@ -211,7 +211,7 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="yEA-FY-lFR"/>
-                                    <barButtonItem width="136" style="plain" systemItem="fixedSpace" id="bLE-qH-SMZ"/>
+                                    <barButtonItem width="84" style="plain" systemItem="fixedSpace" id="bLE-qH-SMZ"/>
                                     <barButtonItem systemItem="stop" id="4Ud-8F-0nG">
                                         <connections>
                                             <action selector="doneTapped:" destination="yIp-l5-Hcq" id="HVQ-pD-ZrF"/>

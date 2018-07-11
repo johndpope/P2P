@@ -54,7 +54,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func connectionLost(){
         print(#function)
-        let connectionAllert = UIAlertController(title: "WARNING", message: "CONNECTION WAS LOST", preferredStyle: .alert)
+        let connectionAllert = UIAlertController(title: "Session Ended", message: "Connection was lost", preferredStyle: .alert)
         
         let reconnectButton = UIAlertAction(title: "Reconnect", style: .default) { (reconnectAlert) in
             self.dismiss(animated: true)
@@ -66,7 +66,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.present(connectionAllert, animated: true, completion: nil)
         }
     }
-    
     
     // MARK: - NIL ISSUE
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
