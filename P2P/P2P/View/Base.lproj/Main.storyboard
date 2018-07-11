@@ -141,7 +141,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <items>
-                                    <barButtonItem title="Edit" id="7BX-ri-w3Z"/>
+                                    <barButtonItem title="Edit" id="7BX-ri-w3Z">
+                                        <connections>
+                                            <action selector="editTapped:" destination="1hL-it-bm9" id="wkM-To-GAd"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem width="94" style="plain" systemItem="fixedSpace" id="Del-xF-OrP"/>
                                     <barButtonItem systemItem="save" id="8YP-Mw-m5g">
                                         <connections>
