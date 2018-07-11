@@ -23,14 +23,23 @@ class DrawData{
     
     func initWithGestureState(state: UIGestureRecognizerState, point: CGPoint) -> DrawData{
         
-        let data : NSMutableData?
+        //let data : Data?
         
         self.x = Double(point.x) // Size of Double and UIGestureRecognizerState are 8 bytes each
         self.y = Double(point.y)
         
-        //let xPointer = UnsafePointer<Double>
+        /*Sample
+         
+         var x: Double = 0.99043125417
+         var length = MemoryLayout<Double>.size // -> 8
+         var x_data = NSData(bytes: &x, length: length)
+         
+         var buffer = [UInt8](repeating: 0x00, count: MemoryLayout<Double>.size)
+         x_data.getBytes(&buffer, length: buffer.count)*/
         
-        data?.append(&x, count: MemoryLayout<Double>.size(ofValue: self.x!))
+        //let data = Data(bytes: <#T##Array<UInt8>#>)
+        
+        //let xPointer = UnsafePointer<Double>
         //data?.append(UnsafeBufferPointer<Double>.)
         
         return self
