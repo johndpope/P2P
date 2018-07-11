@@ -12,8 +12,6 @@ import UIKit
 struct cellData{
     let image: UIImage?
     let name: String?
-    
-    
 }
 
 class CustomData{

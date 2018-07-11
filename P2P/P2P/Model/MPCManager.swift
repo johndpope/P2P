@@ -5,15 +5,10 @@
 //  Created by Roma Babajanyan on 19/06/2018.
 //  Copyright © 2018 Roma Babajanyan. All rights reserved.
 //
-//  
-// Date sorting, contatins in array
-
-//TODO: Test cases
-// Tested case: when one of the devices closes the app, connection ends (but no notification, gotta add this), when returns back to the app, it seems that the new peer in the array establishes the connection, and the new session starts on the background (NEED TO FIND OUT WHETTHER OLD SESSION REMAINS LAUNCHES OR NOT). So it continues to send images correctly. Refactoring of the Multipeer Connectivity is quite done. Wrapped to the MPCManager.swift file. App uses delegation and notification patterns for app work.
 
 // Need to fix that error with ICE etc. UPD: TRY OUT NEW IOS 11.4 VERSION ON BOTH DEVICES
-//Figure out how to send videoStream
-//Test this thing out on more failure cases. More crititcal ones. UPD: SEE NOTES 
+// UPD: Error remains when both devices run latest 11.4
+// Figure out how to send videoStream
 
 import UIKit
 import MultipeerConnectivity
@@ -51,9 +46,9 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         browser = MCNearbyServiceBrowser(peer: peer, serviceType: "cblr")
         browser.delegate = self
         
-        //advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: nil, serviceType: "cblr")
+        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: nil, serviceType: "cblr")
         //advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: ["index" : String(index), "creation_date" : String(creationDate.timeIntervalSince1970), "device" : broadcastingDeviceName, "id" : UIDevice.currentDevice().identifierForVendor!.UUIDString], serviceType: <#T##String#>)
-        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: ["creation_date": String(creationDate.timeIntervalSince1970),"device": UIDevice.current.name, "id": UIDevice.current.identifierForVendor!.uuidString], serviceType: "cblr")
+//        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: ["creation_date": String(creationDate.timeIntervalSince1970),"device": UIDevice.current.name, "id": UIDevice.current.identifierForVendor!.uuidString], serviceType: "cblr")
         advertiser.delegate = self
     }
     
@@ -109,10 +104,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         switch  state {
         case MCSessionState.connected:
             print("Connected to session: \(session)")
-            // Delegation to the setup view controller to display the alert to the user
             MPCDelegate?.connectionEstablished(peerID: peerID)
-            //MPCDelegate?.connectedWithPeer(peerID: peerID)
-            
             
         case MCSessionState.connecting:
             print("Connecting to session: \(session)")
@@ -142,7 +134,6 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
             print("false")
             return false
         }
-
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
@@ -153,9 +144,9 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         guard let imageUIImage = UIImage(data: data) else { return }
         
         
-        let name = Notification.Name(rawValue: "Recieved")
+        let imgRecieved = Notification.Name(rawValue: "Recieved")
         
-        NotificationCenter.default.post(name: name, object: imageUIImage)
+        NotificationCenter.default.post(name: imgRecieved, object: imageUIImage)
     }
 
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
