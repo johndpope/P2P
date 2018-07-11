@@ -5,7 +5,7 @@
 //  Created by Roma Babajanyan on 19/06/2018.
 //  Copyright © 2018 Roma Babajanyan. All rights reserved.
 //
-// хуй
+//  
 // Date sorting, contatins in array
 
 //TODO: Test cases
@@ -150,22 +150,8 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         print(#function)
 
         let peersArray = NSArray(object: targetPeer)
-        
-        // MARK: - IMAGE COMPRESSION ISSUE
-//        if let imageData = UIImagePNGRepresentation(image){
-//            do {
-//                try session.send(imageData, toPeers: peersArray as! [MCPeerID], with: .reliable)
-//            } catch {
-//                print("failed send data",error.localizedDescription)
-//            }
-//            print("true")
-//            return true
-//        
-//        } else {
-//            print("false")
-//            return false
-//        }
-        if let imageData = UIImageJPEGRepresentation(image, 0.5){
+
+        if let imageData = UIImageJPEGRepresentation(image, 0.25){
             do {
                 try session.send(imageData, toPeers: peersArray as! [MCPeerID], with: .reliable)
             } catch {

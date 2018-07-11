@@ -24,9 +24,12 @@
 		E0FEB64B20ECE8BC000B93C3 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FEB64A20ECE8BC000B93C3 /* MainTableViewCell.swift */; };
 		E0FEB64F20ED0EFE000B93C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FEB64E20ED0EFE000B93C3 /* MainViewController.swift */; };
 		E0FEB65420EE6EE7000B93C3 /* ImageCompression.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FEB65320EE6EE7000B93C3 /* ImageCompression.swift */; };
+		F4ADD2F3A8F41F49501983F9 /* Pods_P2P.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81EBA00F62EEFC98E7F2598B /* Pods_P2P.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		81EBA00F62EEFC98E7F2598B /* Pods_P2P.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_P2P.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B59322930E0E7E258D4A7F78 /* Pods-P2P.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P2P.release.xcconfig"; path = "Pods/Target Support Files/Pods-P2P/Pods-P2P.release.xcconfig"; sourceTree = "<group>"; };
 		E031565920EBBD7E0050495F /* PopOutPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOutPreviewController.swift; sourceTree = "<group>"; };
 		E09229B720D38E15005160B2 /* CustomData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomData.swift; sourceTree = "<group>"; };
 		E0A7D71520D8D1C2007E5678 /* MPCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
@@ -46,6 +49,7 @@
 		E0FEB64A20ECE8BC000B93C3 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		E0FEB64E20ED0EFE000B93C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E0FEB65320EE6EE7000B93C3 /* ImageCompression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompression.swift; sourceTree = "<group>"; };
+		E1B6615BF5083B603C5C6B33 /* Pods-P2P.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P2P.debug.xcconfig"; path = "Pods/Target Support Files/Pods-P2P/Pods-P2P.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,12 +57,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4ADD2F3A8F41F49501983F9 /* Pods_P2P.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		080C4306546DC674D2D6BE0A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				81EBA00F62EEFC98E7F2598B /* Pods_P2P.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A6C2419077CC9806D32E5C23 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E1B6615BF5083B603C5C6B33 /* Pods-P2P.debug.xcconfig */,
+				B59322930E0E7E258D4A7F78 /* Pods-P2P.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E09229B320D30D40005160B2 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +130,8 @@
 			children = (
 				E0E0247B20CF3134000FD2D6 /* P2P */,
 				E0E0247A20CF3134000FD2D6 /* Products */,
+				A6C2419077CC9806D32E5C23 /* Pods */,
+				080C4306546DC674D2D6BE0A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,9 +163,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E0E0248B20CF3135000FD2D6 /* Build configuration list for PBXNativeTarget "P2P" */;
 			buildPhases = (
+				58E9963E53012BAB43BA93A6 /* [CP] Check Pods Manifest.lock */,
 				E0E0247520CF3134000FD2D6 /* Sources */,
 				E0E0247620CF3134000FD2D6 /* Frameworks */,
 				E0E0247720CF3134000FD2D6 /* Resources */,
+				7515A528F6302FBE30F5D83C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -197,6 +223,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		58E9963E53012BAB43BA93A6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-P2P-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7515A528F6302FBE30F5D83C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-P2P/Pods-P2P-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/iOSPhotoEditor/iOSPhotoEditor.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iOSPhotoEditor.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-P2P/Pods-P2P-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E0E0247520CF3134000FD2D6 /* Sources */ = {
@@ -358,6 +423,7 @@
 		};
 		E0E0248C20CF3135000FD2D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1B6615BF5083B603C5C6B33 /* Pods-P2P.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -377,6 +443,7 @@
 		};
 		E0E0248D20CF3135000FD2D6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B59322930E0E7E258D4A7F78 /* Pods-P2P.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
