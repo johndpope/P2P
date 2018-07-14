@@ -12,6 +12,7 @@
 		E06D143820F63D0600B552BD /* IEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D143720F63D0600B552BD /* IEManager.swift */; };
 		E06D143A20F6493800B552BD /* Delegation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D143920F6493800B552BD /* Delegation.swift */; };
 		E06D143D20F65D8700B552BD /* DrawData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D143C20F65D8700B552BD /* DrawData.swift */; };
+		E06D148F20FA2A3300B552BD /* FManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D148E20FA2A3300B552BD /* FManager.swift */; };
 		E09229B820D38E15005160B2 /* CustomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09229B720D38E15005160B2 /* CustomData.swift */; };
 		E0A7D71620D8D1C2007E5678 /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7D71520D8D1C2007E5678 /* MPCManager.swift */; };
 		E0A7D71820D8DB6C007E5678 /* SetUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7D71720D8DB6C007E5678 /* SetUpViewController.swift */; };
@@ -37,6 +38,7 @@
 		E06D143720F63D0600B552BD /* IEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IEManager.swift; sourceTree = "<group>"; };
 		E06D143920F6493800B552BD /* Delegation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegation.swift; sourceTree = "<group>"; };
 		E06D143C20F65D8700B552BD /* DrawData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawData.swift; sourceTree = "<group>"; };
+		E06D148E20FA2A3300B552BD /* FManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FManager.swift; sourceTree = "<group>"; };
 		E09229B720D38E15005160B2 /* CustomData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomData.swift; sourceTree = "<group>"; };
 		E0A7D71520D8D1C2007E5678 /* MPCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
 		E0A7D71720D8DB6C007E5678 /* SetUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +98,14 @@
 			path = Edit;
 			sourceTree = "<group>";
 		};
+		E06D148D20FA29BB00B552BD /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				E06D148E20FA2A3300B552BD /* FManager.swift */,
+			);
+			path = Log;
+			sourceTree = "<group>";
+		};
 		E09229B320D30D40005160B2 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +139,7 @@
 		E09229B620D30E4D005160B2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E06D148D20FA29BB00B552BD /* Log */,
 				E06D143B20F65D7200B552BD /* Edit */,
 				E09229B720D38E15005160B2 /* CustomData.swift */,
 				E0CE148A20D65F9700D07F1D /* NiceButton.swift */,
@@ -266,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E06D148F20FA2A3300B552BD /* FManager.swift in Sources */,
 				E0FEB64B20ECE8BC000B93C3 /* MainTableViewCell.swift in Sources */,
 				E0A7D71C20DA61B3007E5678 /* SetUpCellTableViewCell.swift in Sources */,
 				E031565A20EBBD7E0050495F /* PopOutPreviewController.swift in Sources */,

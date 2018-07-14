@@ -16,6 +16,7 @@ var tableData = CustomData()
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate, MPCConnectionDelegate, StreamDelegate{
 
     let recievedName = Notification.Name(rawValue: "Recieved")
+    let endName = Notification.Name(rawValue: "disconnect")
     
     var current: UIImage?
     
@@ -37,11 +38,38 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // Do any additional setup after loading the view.
          NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.recieved(_:)), name: recievedName, object: nil)
+         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.end(_:)), name: endName, object: nil)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    @objc func recieved(_ notification: NSNotification){
+        print(#function)
+        let recievedImage = notification.object as! UIImage
+        //print(recievedImage,"\n\n\n\n\n\n\n\n\n")
+        current = recievedImage
+        //print(current)
+//        tableData.data.append(cellData(image: recievedImage, name: "IMG_\(tableData.data.count + 1)"))
+        
+        //performSegue(withIdentifier: "modalySegue", sender: self)
+        DispatchQueue.main.async {
+            //let recievedImage = notification.object as! UIImage
+            tableData.data.append(cellData(image: recievedImage, name: "IMG_\(tableData.data.count + 1)"))
+            
+
+            //            tableData.data.append(cellData(image: recievedImage, name: "IMG_\(tableData.data.count + 1)"))
+            self.tableView.reloadData()
+        }
+        
+        
+    }
+    
+    @objc func end(_ notification: NSNotification){
+        print("\n\n",#function,"\n\n")
+        self.appDelegate.mpcManager.session.disconnect()
+    }
+    
     
     //    func foundPeer() {
     //        //tblPeers.reloadData()
@@ -76,24 +104,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
                 //previewVC.imageSheet?.image = current!
         }
-    }
-    
-    @objc func recieved(_ notification: NSNotification){
-        let recievedImage = notification.object as! UIImage
-        //print(recievedImage,"\n\n\n\n\n\n\n\n\n")
-        current = recievedImage
-        //print(current)
-        tableData.data.append(cellData(image: recievedImage, name: "IMG_\(tableData.data.count + 1)"))
-        
-        //performSegue(withIdentifier: "modalySegue", sender: self)
-        DispatchQueue.main.async {
-            //let recievedImage = notification.object as! UIImage
-            
-            //            tableData.data.append(cellData(image: recievedImage, name: "IMG_\(tableData.data.count + 1)"))
-            self.tableView.reloadData()
-        }
-     
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -208,10 +218,16 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 //
     @IBAction func doneTapped(_ sender: Any) {
         self.dismiss(animated: true) {
+            self.disconnectBoth()
             self.appDelegate.mpcManager.session.disconnect()
         }
     }
     
+    
+    func disconnectBoth(){
+        self.appDelegate.mpcManager.sendSignalToEnd("disconnect", toPeer: self.appDelegate.mpcManager.foundPeers[0])
+        print("send signal to abort ")
+    }
     
     func startOutputStream(_ output: OutputStream) {
         output.delegate = self
