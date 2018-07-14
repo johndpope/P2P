@@ -30,4 +30,6 @@ protocol MPCManagerDelegate {
 protocol MPCConnectionDelegate{
     func connectionLost()
     
+    func startOutputStream(_ output: OutputStream)
+    
 }

@@ -13,7 +13,7 @@ import MultipeerConnectivity
 var myIndex = 0
 var tableData = CustomData()
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate, MPCConnectionDelegate{
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate, MPCConnectionDelegate, StreamDelegate{
 
     let recievedName = Notification.Name(rawValue: "Recieved")
     
@@ -212,6 +212,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    
+    func startOutputStream(_ output: OutputStream) {
+        output.delegate = self
+    }
     
     
     

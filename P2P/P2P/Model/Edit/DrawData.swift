@@ -28,19 +28,18 @@ class DrawData{
         self.x = Double(point.x) // Size of Double and UIGestureRecognizerState are 8 bytes each
         self.y = Double(point.y)
         
-        /*Sample
+        //Sample
          
          var x: Double = 0.99043125417
          var length = MemoryLayout<Double>.size // -> 8
          var x_data = NSData(bytes: &x, length: length)
          
          var buffer = [UInt8](repeating: 0x00, count: MemoryLayout<Double>.size)
-         x_data.getBytes(&buffer, length: buffer.count)*/
+         x_data.getBytes(&buffer, length: buffer.count)
         
-        //let data = Data(bytes: <#T##Array<UInt8>#>)
         
-        //let xPointer = UnsafePointer<Double>
-        //data?.append(UnsafeBufferPointer<Double>.)
+        
+        let data = Data(bytes: buffer)
         
         return self
     }
