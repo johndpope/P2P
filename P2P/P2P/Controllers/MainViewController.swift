@@ -67,7 +67,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @objc func end(_ notification: NSNotification){
         print("\n\n",#function,"\n\n")
-        self.appDelegate.mpcManager.session.disconnect()
+        dismiss(animated: true) {
+            self.appDelegate.mpcManager.session.disconnect()
+        }
     }
     
     
@@ -220,6 +222,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.appDelegate.mpcManager.sendSignalToEnd("ABORT", toPeer: self.appDelegate.mpcManager.foundPeers[0])
         
         dismiss(animated: true) {
+            print("bye bye")
+            
             self.appDelegate.mpcManager.session.disconnect()
         }
         

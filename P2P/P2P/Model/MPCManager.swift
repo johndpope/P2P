@@ -129,7 +129,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
             print("Not connected to session \(session)")
 //            logInfo = logInfo + "Not connected to session \(session)\n\n"
 //            Loger.log(info: logInfo, name: name)
-            MPCCDelegate?.connectionLost()
+            //MPCCDelegate?.connectionLost()
         }
     }
     
@@ -137,6 +137,11 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         print(#function)
         
         if let img = UIImage(data: data){
+            print("hui tebe a ne konec")
+
+            let imgRecieved = Notification.Name(rawValue: "Recieved")
+            
+            NotificationCenter.default.post(name: imgRecieved, object: img)
             print("hui tebe")
         } else {
             let text = data.toString()
