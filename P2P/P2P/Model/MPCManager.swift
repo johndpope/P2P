@@ -12,9 +12,17 @@
 import UIKit
 import MultipeerConnectivity
 import os.log
+import Foundation
+
+extension Data
+{
+    func toString() -> String
+    {
+        return String(data: self, encoding: .utf8)!
+    }
+}
 
 let name = "log.txt"
-
 
 class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, StreamDelegate {
    
@@ -59,7 +67,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
             foundPeers.append(peerID)
         }
         
-        print(#function)
+        //print(#function)
         print(foundPeers)
         MPCDelegate?.foundPeer()
     }
@@ -128,28 +136,14 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         print(#function)
         
-        //var imageUIImage: UIImage = UIImage(data: data)
-        // TODO: - FIX THE END SIGNAL TO THE IMG OR CORRECT HANDLING IN THIS METHOD
-        if let endSignal = String(data: data, encoding: String.Encoding.utf8) as String! {
-            print("suka naxui",
-                  
-                  endSignal)
-            let endRecieved = Notification.Name(rawValue: "\(endSignal)")
-            NotificationCenter.default.post(name: endRecieved, object: endSignal)
+        if let img = UIImage(data: data){
+            print("hui tebe")
+        } else {
+            let text = data.toString()
+            print(text)
+            let endSession = Notification.Name(rawValue: "END")
+            NotificationCenter.default.post(name: endSession, object: text)
         }
-        
-        if let imageUIImage = UIImage(data: data) {
-            //print("Image recieved")
-            let imgRecieved = Notification.Name(rawValue: "Recieved")
-            NotificationCenter.default.post(name: imgRecieved, object: imageUIImage)
-        }//else{
-//            print("abort signal recieved")
-//            let endSignal = String(data: data, encoding: String.Encoding.utf8) as String!
-//            print(endSignal!)
-//            let endRecieved = Notification.Name(rawValue: "\(endSignal!)")
-//            NotificationCenter.default.post(name: endRecieved, object: endSignal!)
-//            return
-//        }
 
     }
     
@@ -178,18 +172,18 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     func sendSignalToEnd(_ signal: String, toPeer targetPeer: MCPeerID){
         print(#function)
         print("still sending abort signal")
-        let data = Data(signal.utf8)
+        let encodedString = Data(signal.utf8)
         let peersArray = NSArray(object: targetPeer)
         print("yjyg")
-        
+
         do{
-            try session.send(data, toPeers: peersArray as! [MCPeerID], with: .reliable)
+            try session.send(encodedString, toPeers: peersArray as! [MCPeerID], with: .reliable)
             print("guck")
         } catch{
             print("error")
             print(error.localizedDescription)
         }
-        
+
     }
     
     func sendData(image: UIImage, toPeer targetPeer: MCPeerID) -> Bool{

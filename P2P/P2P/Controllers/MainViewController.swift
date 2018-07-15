@@ -16,7 +16,7 @@ var tableData = CustomData()
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate, MPCConnectionDelegate, StreamDelegate{
 
     let recievedName = Notification.Name(rawValue: "Recieved")
-    let endName = Notification.Name(rawValue: "disconnect")
+    let endName = Notification.Name(rawValue: "END")
     
     var current: UIImage?
     
@@ -217,16 +217,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 //    }
 //
     @IBAction func doneTapped(_ sender: Any) {
-        self.dismiss(animated: true) {
-            self.disconnectBoth()
+        self.appDelegate.mpcManager.sendSignalToEnd("ABORT", toPeer: self.appDelegate.mpcManager.foundPeers[0])
+        
+        dismiss(animated: true) {
             self.appDelegate.mpcManager.session.disconnect()
         }
-    }
-    
-    
-    func disconnectBoth(){
-        self.appDelegate.mpcManager.sendSignalToEnd("disconnect", toPeer: self.appDelegate.mpcManager.foundPeers[0])
-        print("send signal to abort ")
+        
     }
     
     func startOutputStream(_ output: OutputStream) {
