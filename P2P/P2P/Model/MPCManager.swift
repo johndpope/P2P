@@ -7,6 +7,7 @@
 
 // Need to fix that error with ICE etc. UPD: TRY OUT NEW IOS 11.4 VERSION ON BOTH DEVICES
 // UPD: Error remains when both devices run latest 11.4
+
 // Figure out how to send videoStream
 
 import UIKit
@@ -132,10 +133,16 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
 //            Loger.log(info: logInfo, name: name)
         case MCSessionState.notConnected:
             print("Not connected to session \(session)")
-            let stateOfApp = UIApplication.shared.applicationState
-            if stateOfApp == .background{
-                print("\n\nNeed to add some code here\n\n")
+            // TODO: - HOW TO DETECT APP IN THE BACKGROUND IN THIS METHOD
+            DispatchQueue.main.async {
+                let stateOfApp = UIApplication.shared.applicationState
+                if stateOfApp == .background{
+                    print("\n\nNeed to add some code here\n\n")
+                } else{
+                    print("хуй")
+                }
             }
+
             // if other app is in background then delegate to other device to disconnect
 //            logInfo = logInfo + "Not connected to session \(session)\n\n"
 //            Loger.log(info: logInfo, name: name)

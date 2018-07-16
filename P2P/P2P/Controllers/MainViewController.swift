@@ -216,12 +216,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: TOOLBAR ACTIONS
     @IBAction func addTapped(_ sender: Any) {
-//        picker = UIImagePickerController()
-//        picker.delegate = self
-//        picker.allowsEditing = false
-//        picker.sourceType = .photoLibrary
-//
-//        present(picker, animated: true, completion: nil)
         imagePicker = OpalImagePickerController()
         imagePicker.imagePickerDelegate = self
         present(imagePicker, animated: true, completion: nil)
@@ -245,8 +239,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    
-    
     @IBAction func refreshTapped(_ sender: Any) {
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -260,28 +252,22 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 //    }
 //
     @IBAction func doneTapped(_ sender: Any) {
-        self.appDelegate.mpcManager.sendSignalToEnd("ABORT", toPeer: self.appDelegate.mpcManager.foundPeers[0])
+        
+        
+        DispatchQueue.main.sync {
+                    self.appDelegate.mpcManager.sendSignalToEnd("ABORT", toPeer: self.appDelegate.mpcManager.foundPeers[0])
+        }
+        // TODO: - WORKAROUND
         
         dismiss(animated: true) {
             print("bye bye")
             
             self.appDelegate.mpcManager.session.disconnect()
         }
-        
     }
-    
+
     func startOutputStream(_ output: OutputStream) {
         output.delegate = self
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
 }
