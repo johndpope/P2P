@@ -191,6 +191,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    @IBAction func unwindSetUp(_segue: UIStoryboardSegue){
+        
+    }
+    
+    @IBAction func addNewPeers(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
     // MARK: REFRESH
     func updateTableView(){
         DispatchQueue.main.async {

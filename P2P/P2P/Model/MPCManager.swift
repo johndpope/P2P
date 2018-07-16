@@ -64,11 +64,15 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
                 print(#function)
 
         if !foundPeers.contains(peerID){
-            foundPeers.append(peerID)
+            if !self.session.connectedPeers.contains(peerID){
+                foundPeers.append(peerID)
+            }
         }
         
         //print(#function)
         print(foundPeers)
+        print(self.session)
+
         MPCDelegate?.foundPeer()
     }
     
@@ -84,6 +88,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
                 break
             }
         }
+        print(self.session)
         MPCDelegate?.lostPeer()
     }
     
@@ -127,6 +132,11 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
 //            Loger.log(info: logInfo, name: name)
         case MCSessionState.notConnected:
             print("Not connected to session \(session)")
+            let stateOfApp = UIApplication.shared.applicationState
+            if stateOfApp == .background{
+                print("\n\nNeed to add some code here\n\n")
+            }
+            // if other app is in background then delegate to other device to disconnect
 //            logInfo = logInfo + "Not connected to session \(session)\n\n"
 //            Loger.log(info: logInfo, name: name)
             //MPCCDelegate?.connectionLost()

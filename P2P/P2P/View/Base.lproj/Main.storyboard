@@ -207,7 +207,12 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="92" style="plain" systemItem="fixedSpace" id="tsm-9y-DZl"/>
-                                    <barButtonItem title="Item" image="icons8-Ð²ÐµÑÑÐ¸ÐºÐ°Ð»ÑÐ½ÑÐ¹-Ð¼Ð¸ÐºÑÐµÑ-Ð½Ð°ÑÑÑÐ¾ÐµÐº-24" id="rJt-YD-ev0"/>
+                                    <barButtonItem title="Item" image="icons8-Ð²ÐµÑÑÐ¸ÐºÐ°Ð»ÑÐ½ÑÐ¹-Ð¼Ð¸ÐºÑÐµÑ-Ð½Ð°ÑÑÑÐ¾ÐµÐº-24" id="rJt-YD-ev0">
+                                        <connections>
+                                            <action selector="addNewPeers:" destination="yIp-l5-Hcq" id="MbB-qj-Wyk"/>
+                                            <segue destination="WF0-Qm-RJT" kind="unwind" unwindAction="unwindSetUpWith_segue:" id="fx8-FU-gpK"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem width="47" style="plain" systemItem="fixedSpace" id="uFD-SS-x8e"/>
                                     <barButtonItem systemItem="refresh" id="53p-G8-qX4">
                                         <connections>
@@ -294,6 +299,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5mU-9j-Cag" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="WF0-Qm-RJT" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2357.5999999999999" y="68.815592203898049"/>
         </scene>
