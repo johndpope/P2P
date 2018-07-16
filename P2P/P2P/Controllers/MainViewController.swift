@@ -70,9 +70,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @objc func end(_ notification: NSNotification){
         print("\n\n",#function,"\n\n")
-        dismiss(animated: true) {
-            self.appDelegate.mpcManager.session.disconnect()
+        DispatchQueue.main.async {
+            self.dismiss(animated: true) {
+                self.appDelegate.mpcManager.session.disconnect()
+            }
         }
+
     }
     
     
@@ -182,13 +185,17 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         picker.dismiss(animated: true, completion: nil)
         
         //print(data)
-        updateTableView()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
         
     }
     
     // MARK: REFRESH
     func updateTableView(){
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: UIIMAGE to DATA
@@ -213,13 +220,18 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func imagePicker(_ picker: OpalImagePickerController, didFinishPickingImages images: [UIImage]) {
-        for image in images{
-            tableData.data.append(cellData(image: image, name: "\(tableData.data.count+1)"))
+        DispatchQueue.main.async {
+            for image in images{
+                tableData.data.append(cellData(image: image, name: "\(tableData.data.count+1)"))
+            }
         }
+
         
         imagePicker.dismiss(animated: true, completion: nil)
         
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
         
         
     }
