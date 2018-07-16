@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02F0FDE5B47BB2BCD618CA9C /* Pods_P2P.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD8D85F7CA4DBB44776C053 /* Pods_P2P.framework */; };
+		E01D165220FCE463000827E3 /* icons8-ÐºÐ¾Ð½ÑÐ°ÐºÑÑ-100.png in Resources */ = {isa = PBXBuildFile; fileRef = E01D165120FCE462000827E3 /* icons8-ÐºÐ¾Ð½ÑÐ°ÐºÑÑ-100.png */; };
 		E031565A20EBBD7E0050495F /* PopOutPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E031565920EBBD7E0050495F /* PopOutPreviewController.swift */; };
 		E06D143820F63D0600B552BD /* IEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D143720F63D0600B552BD /* IEManager.swift */; };
 		E06D143A20F6493800B552BD /* Delegation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06D143920F6493800B552BD /* Delegation.swift */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		6FD8D85F7CA4DBB44776C053 /* Pods_P2P.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_P2P.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B59322930E0E7E258D4A7F78 /* Pods-P2P.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P2P.release.xcconfig"; path = "Pods/Target Support Files/Pods-P2P/Pods-P2P.release.xcconfig"; sourceTree = "<group>"; };
+		E01D165120FCE462000827E3 /* icons8-ÐºÐ¾Ð½ÑÐ°ÐºÑÑ-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-ÐºÐ¾Ð½ÑÐ°ÐºÑÑ-100.png"; sourceTree = "<group>"; };
 		E031565920EBBD7E0050495F /* PopOutPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOutPreviewController.swift; sourceTree = "<group>"; };
 		E06D143720F63D0600B552BD /* IEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IEManager.swift; sourceTree = "<group>"; };
 		E06D143920F6493800B552BD /* Delegation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegation.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				E09229B520D30D68005160B2 /* Controllers */,
 				E09229B420D30D5A005160B2 /* App */,
 				E0E0248320CF3135000FD2D6 /* Assets.xcassets */,
+				E01D165120FCE462000827E3 /* icons8-ÐºÐ¾Ð½ÑÐ°ÐºÑÑ-100.png */,
 				E0E0248820CF3135000FD2D6 /* Info.plist */,
 			);
 			path = P2P;
@@ -253,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0E0248720CF3135000FD2D6 /* LaunchScreen.storyboard in Resources */,
+				E01D165220FCE463000827E3 /* icons8-ÐºÐ¾Ð½ÑÐ°ÐºÑÑ-100.png in Resources */,
 				E0E0248420CF3135000FD2D6 /* Assets.xcassets in Resources */,
 				E0E0248220CF3134000FD2D6 /* Main.storyboard in Resources */,
 			);

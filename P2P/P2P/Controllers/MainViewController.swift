@@ -58,7 +58,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         //performSegue(withIdentifier: "modalySegue", sender: self)
         DispatchQueue.main.async {
             //let recievedImage = notification.object as! UIImage
-            tableData.data.append(cellData(image: recievedImage, name: "IMG_\(tableData.data.count + 1)"))
+            tableData.data.append(cellData(image: recievedImage, name: "\(tableData.data.count + 1)"))
             
 
             //            tableData.data.append(cellData(image: recievedImage, name: "IMG_\(tableData.data.count + 1)"))
@@ -123,7 +123,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
+        return 60.0
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -168,10 +168,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         cell.cellLabel.text = tableData.data[indexPath.row].name
         cell.cellImage.image = tableData.data[indexPath.row].image
-        cell.cellImage.layer.cornerRadius = cell.cellImage.frame.height / 2
-        cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 3
 
-        
         return cell
     }
 
@@ -179,7 +176,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let imagePicked = info[UIImagePickerControllerOriginalImage]{
             let img = imagePicked as! UIImage
-            tableData.data.append(cellData.init(image: img, name: "IMG_\(tableData.data.count+1)"))
+            tableData.data.append(cellData.init(image: img, name: "\(tableData.data.count + 1)"))
         }
         
         picker.dismiss(animated: true, completion: nil)
@@ -217,7 +214,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func imagePicker(_ picker: OpalImagePickerController, didFinishPickingImages images: [UIImage]) {
         for image in images{
-            tableData.data.append(cellData(image: image, name: "IMG_\(tableData.data.count+1)"))
+            tableData.data.append(cellData(image: image, name: "\(tableData.data.count+1)"))
         }
         
         imagePicker.dismiss(animated: true, completion: nil)

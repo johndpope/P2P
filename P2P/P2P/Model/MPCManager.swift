@@ -130,6 +130,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
 //            logInfo = logInfo + "Not connected to session \(session)\n\n"
 //            Loger.log(info: logInfo, name: name)
             //MPCCDelegate?.connectionLost()
+            // TODO: - UPD. WHEN UNCOMMENT connectionLost() delegate method to display an allert and dismissing to the setup, bug of the multiple session arrives aagin. Gotta find out how to fix it
         }
     }
     
