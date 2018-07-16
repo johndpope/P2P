@@ -40,10 +40,22 @@ class SeeingViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func saveTapped(_ sender: Any) {
-        if let data = UIImageJPEGRepresentation(imageView.image!, 0.5){
-            let filename = getDocumentsDirectory().appendingPathComponent("img.jpeg")
-            try? data.write(to: filename)
+//        if let data = UIImageJPEGRepresentation(imageView.image!, 0.5){
+//            let filename = getDocumentsDirectory().appendingPathComponent("img.jpeg")
+//            try? data.write(to: filename)
+//        }
+        
+        let actionSheet = UIAlertController(title: "", message: "More", preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        
+        let saveAction = UIAlertAction(title: "Save Image", style: .default) { (save) in
+            UIImageWriteToSavedPhotosAlbum(self.imageView.image!, nil, nil, nil)
         }
+        
+        
+        actionSheet.addAction(saveAction)
+        
+        self.present(actionSheet, animated: true, completion: nil)
     }
     
     func getDocumentsDirectory() -> URL{

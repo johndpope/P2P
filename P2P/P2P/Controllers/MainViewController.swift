@@ -8,12 +8,12 @@
 
 import UIKit
 import MultipeerConnectivity
-
+import OpalImagePicker
 
 var myIndex = 0
 var tableData = CustomData()
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate, MPCConnectionDelegate, StreamDelegate{
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate, MPCConnectionDelegate, StreamDelegate, OpalImagePickerControllerDelegate{
 
     let recievedName = Notification.Name(rawValue: "Recieved")
     let endName = Notification.Name(rawValue: "END")
@@ -25,6 +25,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var tableView: UITableView!
     //var imagePicker: UIImagePickerController!
     var picker = UIImagePickerController()
+    var imagePicker = OpalImagePickerController()
+    //imagePicker.imagePickerDelegate = self
+    //present(imagePicker, animated: true, completion: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -152,7 +155,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
         
-        return [share,del]
+        let save = UITableViewRowAction(style: .normal, title: "Save") { (save, index) in
+            UIImageWriteToSavedPhotosAlbum(tableData.data[indexPath.row].image!, nil, nil, nil)
+        }
+        
+        return [share,del,save]
     }
     
     // Getting the cell and configuring it
@@ -196,12 +203,28 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: TOOLBAR ACTIONS
     @IBAction func addTapped(_ sender: Any) {
-        picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = false
-        picker.sourceType = .photoLibrary
+//        picker = UIImagePickerController()
+//        picker.delegate = self
+//        picker.allowsEditing = false
+//        picker.sourceType = .photoLibrary
+//
+//        present(picker, animated: true, completion: nil)
+        imagePicker = OpalImagePickerController()
+        imagePicker.imagePickerDelegate = self
+        present(imagePicker, animated: true, completion: nil)
         
-        present(picker, animated: true, completion: nil)
+    }
+    
+    func imagePicker(_ picker: OpalImagePickerController, didFinishPickingImages images: [UIImage]) {
+        for image in images{
+            tableData.data.append(cellData(image: image, name: "IMG_\(tableData.data.count+1)"))
+        }
+        
+        imagePicker.dismiss(animated: true, completion: nil)
+        
+        self.tableView.reloadData()
+        
+        
     }
     
     

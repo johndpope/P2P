@@ -148,9 +148,9 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="94" style="plain" systemItem="fixedSpace" id="Del-xF-OrP"/>
-                                    <barButtonItem systemItem="save" id="8YP-Mw-m5g">
+                                    <barButtonItem systemItem="action" id="8YP-Mw-m5g">
                                         <connections>
-                                            <action selector="saveTapped:" destination="1hL-it-bm9" id="4qR-FA-dpf"/>
+                                            <action selector="saveTapped:" destination="1hL-it-bm9" id="9jB-Pd-YxW"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="UnI-tQ-eeb"/>
